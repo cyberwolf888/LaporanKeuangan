@@ -28,8 +28,8 @@
             <span class="title">Komoditas</span>
         </a>
     </li>
-    <li class="nav-item  ">
-        <a href="javascript:;" class="nav-link">
+    <li class="nav-item  @if (Route::currentRouteName() === 'dagang') active @endif">
+        <a href="{{ url('/operator/dagang') }}" class="nav-link">
             <i class="icon-puzzle"></i>
             <span class="title">Dagang</span>
         </a>

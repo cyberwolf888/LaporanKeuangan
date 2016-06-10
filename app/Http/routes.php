@@ -66,6 +66,16 @@ Route::group(['middleware' => ['auth', 'rbac:is,operator'], 'prefix' => 'operato
         Route::post('/edit/{id}',['uses'=>'Operator\KomoditasController@update']);
     });
 
+    Route::group(['prefix'=>'dagang', 'as'=>'dagang'], function () {
+        Route::get('/',['uses'=>'Operator\DagangController@index']);
+        Route::get('/create',['uses'=>'Operator\DagangController@create']);
+        Route::post('/create',['uses'=>'Operator\DagangController@store']);
+        Route::get('/datatable',['uses'=>'Operator\DagangController@dataTable', 'middleware' => 'ajax']);
+        Route::delete('/delete/{id}',['uses'=>'Operator\DagangController@destroy', 'middleware' => 'ajax']);
+        Route::get('/edit/{id}',['uses'=>'Operator\DagangController@edit']);
+        Route::post('/edit/{id}',['uses'=>'Operator\DagangController@update']);
+    });
+
 });
 
 /*
