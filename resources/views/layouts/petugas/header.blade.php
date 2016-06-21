@@ -4,7 +4,7 @@
     <div class="page-header-inner ">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="{{ url('/operator') }}">
+            <a href="{{ url('/petugas') }}">
                 <img src="{{ url('/assets') }}/pages/img/logo1.png" alt="logo" class="logo-default img-responsive" /> </a>
             <div class="menu-toggler sidebar-toggler">
                 <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
@@ -16,34 +16,7 @@
         <!-- END RESPONSIVE MENU TOGGLER -->
         <!-- BEGIN PAGE ACTIONS -->
         <!-- DOC: Remove "hide" class to enable the page header actions -->
-        <div class="page-actions hidden-480">
-            <div class="btn-group">
-                <button type="button" class="btn red-haze btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                    <span class="hidden-sm hidden-xs">Actions&nbsp;</span>
-                    <i class="fa fa-angle-down"></i>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li>
-                        <a href="javascript:;">
-                            <i class="icon-docs"></i> Add New Dagang </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="icon-tag"></i> Add New Petugas </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="icon-share"></i> Add New Iuran </a>
-                    </li>
-                    <li class="divider"> </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="icon-settings"></i> Settings
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+
         <!-- END PAGE ACTIONS -->
         <!-- BEGIN PAGE TOP -->
         <div class="page-top">

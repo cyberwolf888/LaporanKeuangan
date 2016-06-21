@@ -38,8 +38,8 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group form-md-line-input form-md-floating-label">
-                    {!! Form::select('komoditas', $komoditas, $model->komoditas, ['class' => 'form-control', 'id'=>'komoditas']) !!}
-                    {!! Form::Label('komoditas', 'Komoditas') !!}
+                    {!! Form::select('id_komoditas', $komoditas, $model->id_komoditas, ['class' => 'form-control', 'id'=>'id_komoditas']) !!}
+                    {!! Form::Label('id_komoditas', 'Komoditas') !!}
                 </div>
             </div>
         </div>

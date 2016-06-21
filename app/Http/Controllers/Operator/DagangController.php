@@ -28,7 +28,7 @@ class DagangController extends Controller
 
     public function dataTable()
     {
-        $pasar = Dagang::join(
+        $data = Dagang::join(
             'pasar',
             function($join){
                 $join->on('dagang.id_pasar', '=', 'pasar.id');
@@ -37,7 +37,7 @@ class DagangController extends Controller
         ->join(
             'komoditas',
             function($join){
-                $join->on('dagang.komoditas', '=', 'komoditas.id');
+                $join->on('dagang.id_komoditas', '=', 'komoditas.id');
             }
         )
         ->select([
@@ -46,7 +46,7 @@ class DagangController extends Controller
             'komoditas.nama_komoditas'
         ]);
 
-        return Datatables::of($pasar)
+        return Datatables::of($data)
             ->setRowClass(function ($data) {
                 return 'row-'.$data->id;
             })
@@ -71,6 +71,7 @@ class DagangController extends Controller
         $model = new Dagang();
         $pasar = Pasar::pluck('nama_pasar', 'id');
         $komoditas = Komoditas::pluck('nama_komoditas', 'id');
+
         return view('operator.dagang.create',['model'=>$model,'pasar'=>$pasar,'komoditas'=>$komoditas]);
     }
 
@@ -88,8 +89,9 @@ class DagangController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $user = Auth::user();
+        $model->id = $model->createId();
         $model->id_pasar = $request->id_pasar;
-        $model->komoditas = $request->komoditas;
+        $model->id_komoditas = $request->id_komoditas;
         $model->nama_dagang = ucwords($request->nama_dagang);
         $model->jenis_dagang = $request->jenis_dagang;
         $model->lokasi = $request->lokasi;
@@ -120,7 +122,10 @@ class DagangController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = Dagang::findOrFail($id);
+        $pasar = Pasar::pluck('nama_pasar', 'id');
+        $komoditas = Komoditas::pluck('nama_komoditas', 'id');
+        return view('operator.dagang.update',['model'=>$model,'pasar'=>$pasar,'komoditas'=>$komoditas]);
     }
 
     /**
@@ -132,7 +137,22 @@ class DagangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $model = Dagang::findOrFail($id);
+        $validator = $model->validator($request->all());
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $user = Auth::user();
+        $model->id_pasar = $request->id_pasar;
+        $model->id_komoditas = $request->id_komoditas;
+        $model->nama_dagang = ucwords($request->nama_dagang);
+        $model->jenis_dagang = $request->jenis_dagang;
+        $model->lokasi = $request->lokasi;
+        $model->updated_by = $user->id;
+        $model->save();
+        Session::flash('success_message', 'Data Dagang successfully updated!');
+
+        return redirect()->back();
     }
 
     /**
@@ -143,6 +163,6 @@ class DagangController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Dagang::findOrFail($id)->delete();
     }
 }

@@ -128,6 +128,6 @@ class KomoditasController extends Controller
      */
     public function destroy($id)
     {
-        Komoditas::destroy($id);
+        Komoditas::findOrFail($id)->delete();
     }
 }

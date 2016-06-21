@@ -4,10 +4,18 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use PHPZen\LaravelRbac\Traits\Rbac;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
     use Rbac;
+    use SoftDeletes;
+
+    const S_PENDING = '303';
+    const S_ACTIVE = '200';
+    const S_BANED = '666';
+
+    protected $dates = ['deleted_at'];
     /**
      * The attributes that are mass assignable.
      *
@@ -25,4 +33,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function pegawai()
+    {
+        return $this->hasOne('App\Models\Pegawai', 'id_users');
+    }
 }

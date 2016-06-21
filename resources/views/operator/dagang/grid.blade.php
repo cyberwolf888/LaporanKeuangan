@@ -77,6 +77,7 @@
                         <table class="table table-striped table-bordered table-hover" id="datatables_dagang">
                             <thead>
                             <tr>
+                                <th> No Dagang </th>
                                 <th> Dagang </th>
                                 <th> Pasar </th>
                                 <th> Komoditas </th>
@@ -102,6 +103,7 @@
 
 @push('page_script')
 {!! Helper::registerDatatablesScript('datatables_dagang', url('/operator/dagang/datatable'), [
+    ['data'=>'id','name'=>'dagang.id'],
     ['data'=>'nama_dagang','name'=>'dagang.nama_dagang'],
     ['data'=>'nama_pasar','name'=>'pasar.nama_pasar'],
     ['data'=>'nama_komoditas','name'=>'komoditas.nama_komoditas'],

@@ -2,24 +2,31 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use Validator;
 
 class Pasar extends Model
 {
+    use SoftDeletes;
     /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'pasar';
+    protected $dates = ['deleted_at'];
 
     public $incrementing = false;
 
     public function validator(array $data)
     {
         return Validator::make($data, [
-            'nama_pasar' => 'required|max:100'
+            'id_pasar' => 'required',
+            'id_komoditas' => 'required',
+            'nama_pasar' => 'required|max:100',
+            'jenis_dagang' => 'required',
+            'lokasi' => 'required|max:100'
         ]);
     }
 

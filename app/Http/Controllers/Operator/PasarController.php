@@ -129,6 +129,6 @@ class PasarController extends Controller
      */
     public function destroy($id)
     {
-        Pasar::destroy($id);
+        Pasar::findOrFail($id)->delete();
     }
 }

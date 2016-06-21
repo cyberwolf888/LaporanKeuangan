@@ -31,9 +31,11 @@ Route::get('/', function(){
 /*
  * Router for user Petugas
  */
-Route::get('/petugas',function(){
-    return 'Petugas';
-})->middleware(['auth', 'rbac:is,petugas']);
+Route::group(['middleware' => ['auth', 'rbac:is,petugas'], 'prefix' => 'petugas'], function () {
+
+    Route::get('/',['as'=>'dashboard','uses'=>'Petugas\DashboardController@index']);
+
+});
 
 /*
  * End Routes
