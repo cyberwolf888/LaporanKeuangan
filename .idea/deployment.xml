@@ -2,7 +2,7 @@
 <project version="4">
   <component name="PublishConfigData" serverName="LaporanKeuangan">
     <serverData>
-      <paths name="LaporanKeuangan">
+      <paths name="AwesomeAds">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />

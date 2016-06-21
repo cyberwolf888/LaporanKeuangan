@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class Dagang extends Model
 {
@@ -22,7 +23,8 @@ class Dagang extends Model
     public function validator(array $data)
     {
         return Validator::make($data, [
-            'nama_dagang' => 'required|max:100'
+            'nama_dagang' => 'required|max:100',
+            'lokasi' => 'required|max:100'
         ]);
     }
 

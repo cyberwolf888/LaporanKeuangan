@@ -5,7 +5,11 @@
 @endsection
 
 @push('plugin_css')
-
+    {!! Helper::registerCss('/global/plugins/select2/css/select2.min.css') !!}
+    {!! Helper::registerCss('/global/plugins/select2/css/select2-bootstrap.min.css') !!}
+<style>
+    .select2-container--bootstrap .select2-selection {  border: none;  }
+</style>
 @endpush
 
 @section('page_title')
@@ -40,9 +44,7 @@
                 </div>
                 <div class="portlet-body form">
                     <div class="row">
-                        <div class="col-md-6">
-                            @include('operator.dagang.form')
-                        </div>
+                        @include('operator.dagang.form')
                     </div>
                 </div>
             </div>
@@ -51,4 +53,3 @@
     </div>
 
 @endsection
-

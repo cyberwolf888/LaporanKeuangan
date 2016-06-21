@@ -23,8 +23,8 @@
             You have some form errors. Please check below.
         </div>
         <div class="form-group form-md-line-input form-md-floating-label">
-            <input type="text" class="form-control" id="form_control_1" name="nama_komoditas" value="{{ $model->nama_komoditas }}">
-            <label for="form_control_1">Nama Komoditas</label>
+            {{ Form::text('nama_komoditas', $model->nama_komoditas, ['class' => 'form-control','id' => 'nama_komoditas']) }}
+            {!! Form::Label('nama_komoditas', 'Nama Komoditas') !!}
         </div>
     </div>
     <div class="form-actions noborder">

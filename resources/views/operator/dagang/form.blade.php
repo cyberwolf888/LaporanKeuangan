@@ -1,4 +1,5 @@
 @if($errors->any())
+<div class="col-md-12">
     <div class="alert alert-danger">
         <button class="close" data-close="alert"></button>
         <span> Please fix this folowing error: </span>
@@ -8,46 +9,96 @@
             @endforeach
         </ul>
     </div>
+</div>
 @endif
 @if(Session::has('success_message'))
+<div class="col-md-12">
     <div class="alert alert-success">
         <button class="close" data-close="alert"></button>
         <span> {{ Session::get('success_message') }} </span>
     </div>
+</div>
 @endif
+
 <form role="form" id="form_dagang" action="" method="post">
-    {!! csrf_field() !!}
-    <div class="form-body">
+    <div class="col-md-12">
         <div class="alert alert-danger display-hide">
             <button class="close" data-close="alert"></button>
             You have some form errors. Please check below.
         </div>
-        <div class="form-group form-md-line-input form-md-floating-label">
-            <input type="text" class="form-control" id="form_control_1" name="nama_dagang" value="{{ $model->nama_dagang }}">
-            <label for="form_control_1">Nama Dagang</label>
-        </div>
-        <div class="form-group form-md-line-input form-md-floating-label">
-            <select class="form-control" id="form_control_1">
-                <option value=""></option>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-                <option value="4">Option 4</option>
-            </select>
-            <label for="form_control_1">Dropdown sample</label>
-        </div>
     </div>
-    <div class="form-actions noborder">
-        <button type="submit" class="btn blue">Submit</button>
-        <a href="{{ url('/operator/dagang') }}" class="btn default">Cancel</a>
+    {!! csrf_field() !!}
+    <div class="form-body">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    {!! Form::select('id_pasar', $pasar, $model->id_pasar, ['class' => 'form-control', 'id'=>'id_pasar']) !!}
+                    {!! Form::Label('id_pasar', 'Pasar') !!}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    {!! Form::select('komoditas', $komoditas, $model->komoditas, ['class' => 'form-control', 'id'=>'komoditas']) !!}
+                    {!! Form::Label('komoditas', 'Komoditas') !!}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    {{ Form::text('nama_dagang', $model->nama_dagang, ['class' => 'form-control','id' => 'nama_dagang']) }}
+                    {!! Form::Label('nama_dagang', 'Nama Dagang') !!}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    {!! Form::select('jenis_dagang', [\App\Models\Dagang::JN_KS=>'Kios', \App\Models\Dagang::JN_PN=>'Penataran'], $model->jenis_dagang, ['class' => 'form-control', 'id'=>'jenis_dagang']) !!}
+                    {!! Form::Label('jenis_dagang', 'Jenis Dagang') !!}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-group form-md-line-input form-md-floating-label">
+                    {{ Form::text('lokasi', $model->lokasi, ['class' => 'form-control','id' => 'lokasi']) }}
+                    {!! Form::Label('lokasi', 'Lokasi') !!}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-actions noborder">
+                    <button type="submit" class="btn blue">Submit</button>
+                    <a href="{{ url('/operator/dagang') }}" class="btn default">Cancel</a>
+                </div>
+            </div>
+        </div>
+
     </div>
+
 </form>
+</div>
 
 @push('plugin_script')
+{!! Helper::registerJs('/global/plugins/select2/js/select2.full.min.js') !!}
 {!! Helper::registerValidateJs() !!}
 @endpush
 
 @push('page_script')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#id_pasar").select2();
+        $("#komoditas").select2();
+    });
+</script>
 <script>
     var FormValidationMd=function()
     {
@@ -86,6 +137,7 @@
                 rules:
                 {
                     nama_dagang:{minlength:5,required:!0},
+                    lokasi:{minlength:3,required:!0},
                     /*
                      email:{required:!0,email:!0},
                      email2:{required:!0,email:!0},

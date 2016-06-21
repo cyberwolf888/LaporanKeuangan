@@ -9,8 +9,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Session;
 use Auth;
-use App\Models\Dagang;
 use Yajra\Datatables\Datatables;
+
+use App\Models\Dagang;
+use App\Models\Komoditas;
 
 class DagangController extends Controller
 {
@@ -67,7 +69,9 @@ class DagangController extends Controller
     public function create()
     {
         $model = new Dagang();
-        return view('operator.dagang.create',['model'=>$model]);
+        $pasar = Pasar::pluck('nama_pasar', 'id');
+        $komoditas = Komoditas::pluck('nama_komoditas', 'id');
+        return view('operator.dagang.create',['model'=>$model,'pasar'=>$pasar,'komoditas'=>$komoditas]);
     }
 
     /**
@@ -78,7 +82,23 @@ class DagangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $model = new Dagang();
+        $validator = $model->validator($request->all());
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $user = Auth::user();
+        $model->id_pasar = $request->id_pasar;
+        $model->komoditas = $request->komoditas;
+        $model->nama_dagang = ucwords($request->nama_dagang);
+        $model->jenis_dagang = $request->jenis_dagang;
+        $model->lokasi = $request->lokasi;
+        $model->status = $model::STS_PENDING;
+        $model->created_by = $user->id;
+        $model->save();
+        Session::flash('success_message', 'Data dagang successfully added!');
+
+        return redirect()->back();
     }
 
     /**

@@ -40,7 +40,7 @@
                         <div class="col-sm-4">
                             <div class="rem-password">
                                 <p>Remember Me
-                                    <input type="checkbox" class="rem-checkbox" />
+                                    <input type="checkbox" class="rem-checkbox" name="remember"/>
                                 </p>
                             </div>
                         </div>

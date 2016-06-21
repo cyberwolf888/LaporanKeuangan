@@ -137,5 +137,5 @@
 <!-- END THEME LAYOUT SCRIPTS -->
 
 @stack('page_script')
-
+</body>
 </html>
