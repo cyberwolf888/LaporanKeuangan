@@ -22,17 +22,13 @@ class Pasar extends Model
     public function validator(array $data)
     {
         return Validator::make($data, [
-            'id_pasar' => 'required',
-            'id_komoditas' => 'required',
-            'nama_pasar' => 'required|max:100',
-            'jenis_dagang' => 'required',
-            'lokasi' => 'required|max:100'
+            'nama_pasar' => 'required|max:100'
         ]);
     }
 
     public function createId()
     {
-        $lastRecord = $this->orderBy('created_at', 'DESC')->first();
+        $lastRecord = $this->withTrashed()->orderBy('created_at', 'DESC')->first();
         if($lastRecord){
             $lastId = substr($lastRecord->id,2)+1;
             $newId = "PS".substr("0".$lastId,-2);
@@ -40,5 +36,20 @@ class Pasar extends Model
             $newId = "PS01";
         }
         return $newId;
+    }
+
+    public function dagang()
+    {
+        return $this->hasMany('App\Models\Dagang', 'id_pasar');
+    }
+
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) {
+            foreach ($model->dagang()->get() as $value) {
+                $value->delete();
+            }
+        });
     }
 }

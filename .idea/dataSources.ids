@@ -29,415 +29,610 @@
       <table id="18" parent="1" name="roles"/>
       <table id="19" parent="1" name="settings"/>
       <table id="20" parent="1" name="users"/>
-      <column id="21" parent="9" name="id">
+      <table id="21" parent="1" name="pungutan"/>
+      <table id="22" parent="1" name="pungutan_bulanan"/>
+      <table id="23" parent="1" name="pungutan_harian"/>
+      <table id="24" parent="1" name="tarif"/>
+      <column id="25" parent="9" name="id">
         <mandatory>1</mandatory>
-        <data-type>int(10)|0</data-type>
-        <sequence-identity>1</sequence-identity>
+        <data-type>char(12)|0</data-type>
       </column>
-      <column id="22" parent="9" name="id_pasar">
+      <column id="26" parent="9" name="id_pasar">
         <mandatory>1</mandatory>
         <data-type>char(5)|0</data-type>
       </column>
-      <column id="23" parent="9" name="komoditas">
+      <column id="27" parent="9" name="id_komoditas">
         <mandatory>1</mandatory>
         <data-type>int(10)|0</data-type>
       </column>
-      <column id="24" parent="9" name="nama_dagang">
+      <column id="28" parent="9" name="nama_dagang">
         <mandatory>1</mandatory>
         <data-type>varchar(100)|0</data-type>
       </column>
-      <column id="25" parent="9" name="jenis_dagang">
+      <column id="29" parent="9" name="jenis_dagang">
         <mandatory>1</mandatory>
         <data-type>enum(&apos;PN&apos;, &apos;KS&apos;)|0</data-type>
       </column>
-      <column id="26" parent="9" name="lokasi">
+      <column id="30" parent="9" name="lokasi">
         <mandatory>1</mandatory>
         <data-type>varchar(100)|0</data-type>
       </column>
-      <column id="27" parent="9" name="status">
+      <column id="31" parent="9" name="status">
         <mandatory>1</mandatory>
         <data-type>enum(&apos;AP&apos;, &apos;PD&apos;, &apos;DL&apos;)|0</data-type>
       </column>
-      <column id="28" parent="9" name="created_at">
-        <mandatory>1</mandatory>
-        <data-type>timestamp|0</data-type>
-        <default-expression>CURRENT_TIMESTAMP</default-expression>
-      </column>
-      <column id="29" parent="9" name="updated_at">
+      <column id="32" parent="9" name="created_at">
         <data-type>timestamp|0</data-type>
       </column>
-      <column id="30" parent="9" name="created_by">
+      <column id="33" parent="9" name="updated_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <column id="34" parent="9" name="created_by">
         <mandatory>1</mandatory>
         <data-type>int(10)|0</data-type>
       </column>
-      <column id="31" parent="9" name="updated_by">
+      <column id="35" parent="9" name="updated_by">
         <data-type>int(10)|0</data-type>
       </column>
-      <index id="32" parent="9" name="FK_dagang_komuditas">
-        <columns>komoditas</columns>
+      <column id="36" parent="9" name="deleted_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <index id="37" parent="9" name="FK_dagang_komuditas">
+        <columns>id_komoditas</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="33" parent="9" name="FK_dagang_pasar">
+      <index id="38" parent="9" name="FK_dagang_pasar">
         <columns>id_pasar</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="34" parent="9" name="PRIMARY">
+      <key id="39" parent="9" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="35" parent="9" name="FK_dagang_pasar">
+      <foreign-key id="40" parent="9" name="FK_dagang_pasar">
         <columns>id_pasar</columns>
         <ref-key>~.pasar.PRIMARY</ref-key>
         <cascade-update-rule>no_action</cascade-update-rule>
         <cascade-delete-rule>no_action</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="36" parent="9" name="FK_dagang_komoditas">
-        <columns>komoditas</columns>
+      <foreign-key id="41" parent="9" name="FK_dagang_komoditas">
+        <columns>id_komoditas</columns>
         <ref-key>~.komoditas.PRIMARY</ref-key>
         <cascade-update-rule>no_action</cascade-update-rule>
         <cascade-delete-rule>no_action</cascade-delete-rule>
       </foreign-key>
-      <column id="37" parent="10" name="id">
+      <column id="42" parent="10" name="id">
         <mandatory>1</mandatory>
         <data-type>int(10)|0</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="38" parent="10" name="nama_komoditas">
+      <column id="43" parent="10" name="nama_komoditas">
         <data-type>varchar(100)|0</data-type>
       </column>
-      <column id="39" parent="10" name="created_at">
+      <column id="44" parent="10" name="created_at">
         <mandatory>1</mandatory>
         <data-type>timestamp|0</data-type>
         <default-expression>CURRENT_TIMESTAMP</default-expression>
       </column>
-      <column id="40" parent="10" name="updated_at">
+      <column id="45" parent="10" name="updated_at">
         <data-type>timestamp|0</data-type>
       </column>
-      <column id="41" parent="10" name="created_by">
+      <column id="46" parent="10" name="created_by">
         <mandatory>1</mandatory>
         <data-type>int(10)|0</data-type>
       </column>
-      <column id="42" parent="10" name="updated_by">
+      <column id="47" parent="10" name="updated_by">
         <data-type>int(10)|0</data-type>
       </column>
-      <index id="43" parent="10" name="nama_komoditas">
+      <column id="48" parent="10" name="deleted_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <index id="49" parent="10" name="nama_komoditas">
         <columns>nama_komoditas</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="44" parent="10" name="PRIMARY">
+      <key id="50" parent="10" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <key id="45" parent="10" name="nama_komoditas">
+      <key id="51" parent="10" name="nama_komoditas">
         <columns>nama_komoditas</columns>
         <underlying-index>nama_komoditas</underlying-index>
       </key>
-      <column id="46" parent="11" name="migration">
+      <column id="52" parent="11" name="migration">
         <mandatory>1</mandatory>
         <data-type>varchar(255)|0</data-type>
       </column>
-      <column id="47" parent="11" name="batch">
+      <column id="53" parent="11" name="batch">
         <mandatory>1</mandatory>
         <data-type>int(11)|0</data-type>
       </column>
-      <column id="48" parent="12" name="id">
+      <column id="54" parent="12" name="id">
         <mandatory>1</mandatory>
         <data-type>char(4)|0</data-type>
       </column>
-      <column id="49" parent="12" name="nama_pasar">
+      <column id="55" parent="12" name="nama_pasar">
         <mandatory>1</mandatory>
         <data-type>varchar(100)|0</data-type>
       </column>
-      <column id="50" parent="12" name="created_at">
-        <mandatory>1</mandatory>
-        <data-type>timestamp|0</data-type>
-        <default-expression>CURRENT_TIMESTAMP</default-expression>
-      </column>
-      <column id="51" parent="12" name="updated_at">
+      <column id="56" parent="12" name="created_at">
         <data-type>timestamp|0</data-type>
       </column>
-      <column id="52" parent="12" name="created_by">
+      <column id="57" parent="12" name="updated_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <column id="58" parent="12" name="created_by">
         <mandatory>1</mandatory>
         <data-type>int(10)|0</data-type>
       </column>
-      <column id="53" parent="12" name="updated_by">
+      <column id="59" parent="12" name="updated_by">
         <data-type>int(10)|0</data-type>
       </column>
-      <key id="54" parent="12" name="PRIMARY">
+      <column id="60" parent="12" name="deleted_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <key id="61" parent="12" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="55" parent="13" name="email">
+      <column id="62" parent="13" name="email">
         <mandatory>1</mandatory>
         <data-type>varchar(255)|0</data-type>
       </column>
-      <column id="56" parent="13" name="token">
+      <column id="63" parent="13" name="token">
         <mandatory>1</mandatory>
         <data-type>varchar(255)|0</data-type>
       </column>
-      <column id="57" parent="13" name="created_at">
+      <column id="64" parent="13" name="created_at">
         <mandatory>1</mandatory>
         <data-type>timestamp|0</data-type>
         <default-expression>CURRENT_TIMESTAMP</default-expression>
       </column>
-      <index id="58" parent="13" name="password_resets_email_index">
+      <index id="65" parent="13" name="password_resets_email_index">
         <columns>email</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="59" parent="13" name="password_resets_token_index">
+      <index id="66" parent="13" name="password_resets_token_index">
         <columns>token</columns>
         <desc-columns></desc-columns>
       </index>
-      <column id="60" parent="14" name="id">
+      <column id="67" parent="14" name="id">
         <mandatory>1</mandatory>
         <data-type>char(9)|0</data-type>
       </column>
-      <column id="61" parent="14" name="id_users">
+      <column id="68" parent="14" name="id_users">
         <mandatory>1</mandatory>
         <data-type>int(10) unsigned|0</data-type>
       </column>
-      <column id="62" parent="14" name="nama_lengkap">
+      <column id="69" parent="14" name="id_pasar">
+        <data-type>char(5)|0</data-type>
+      </column>
+      <column id="70" parent="14" name="nama_lengkap">
         <mandatory>1</mandatory>
         <data-type>varchar(50)|0</data-type>
       </column>
-      <column id="63" parent="14" name="jenis_kelamin">
+      <column id="71" parent="14" name="jenis_kelamin">
         <mandatory>1</mandatory>
         <data-type>enum(&apos;P&apos;, &apos;L&apos;)|0</data-type>
       </column>
-      <column id="64" parent="14" name="alamat">
+      <column id="72" parent="14" name="alamat">
         <mandatory>1</mandatory>
         <data-type>varchar(100)|0</data-type>
       </column>
-      <column id="65" parent="14" name="no_telp">
+      <column id="73" parent="14" name="no_telp">
         <mandatory>1</mandatory>
         <data-type>varchar(12)|0</data-type>
       </column>
-      <column id="66" parent="14" name="photo">
+      <column id="74" parent="14" name="photo">
         <data-type>varchar(255)|0</data-type>
       </column>
-      <column id="67" parent="14" name="created_at">
+      <column id="75" parent="14" name="created_at">
         <mandatory>1</mandatory>
         <data-type>timestamp|0</data-type>
         <default-expression>CURRENT_TIMESTAMP</default-expression>
       </column>
-      <column id="68" parent="14" name="updated_at">
+      <column id="76" parent="14" name="updated_at">
         <data-type>timestamp|0</data-type>
       </column>
-      <column id="69" parent="14" name="created_by">
+      <column id="77" parent="14" name="created_by">
         <mandatory>1</mandatory>
         <data-type>int(10)|0</data-type>
       </column>
-      <column id="70" parent="14" name="updated_by">
+      <column id="78" parent="14" name="updated_by">
         <data-type>int(10)|0</data-type>
       </column>
-      <index id="71" parent="14" name="FK_pegawai_users">
+      <column id="79" parent="14" name="deleted_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <index id="80" parent="14" name="FK_pegawai_users">
         <columns>id_users</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="72" parent="14" name="PRIMARY">
+      <key id="81" parent="14" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="73" parent="14" name="FK_pegawai_users">
+      <foreign-key id="82" parent="14" name="FK_pegawai_users">
         <columns>id_users</columns>
         <ref-key>~.users.PRIMARY</ref-key>
         <cascade-update-rule>no_action</cascade-update-rule>
         <cascade-delete-rule>no_action</cascade-delete-rule>
       </foreign-key>
-      <column id="74" parent="15" name="id">
+      <column id="83" parent="15" name="id">
         <mandatory>1</mandatory>
         <data-type>int(10) unsigned|0</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="75" parent="15" name="permission_id">
+      <column id="84" parent="15" name="permission_id">
         <mandatory>1</mandatory>
         <data-type>int(11)|0</data-type>
       </column>
-      <column id="76" parent="15" name="role_id">
+      <column id="85" parent="15" name="role_id">
         <mandatory>1</mandatory>
         <data-type>int(11)|0</data-type>
       </column>
-      <column id="77" parent="15" name="created_at">
+      <column id="86" parent="15" name="created_at">
         <data-type>timestamp|0</data-type>
       </column>
-      <column id="78" parent="15" name="updated_at">
+      <column id="87" parent="15" name="updated_at">
         <data-type>timestamp|0</data-type>
       </column>
-      <index id="79" parent="15" name="permission_role_permission_id_index">
+      <index id="88" parent="15" name="permission_role_permission_id_index">
         <columns>permission_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="80" parent="15" name="permission_role_role_id_index">
+      <index id="89" parent="15" name="permission_role_role_id_index">
         <columns>role_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="81" parent="15" name="PRIMARY">
+      <key id="90" parent="15" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="82" parent="16" name="id">
+      <column id="91" parent="16" name="id">
         <mandatory>1</mandatory>
         <data-type>int(10) unsigned|0</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="83" parent="16" name="name">
+      <column id="92" parent="16" name="name">
         <mandatory>1</mandatory>
         <data-type>varchar(255)|0</data-type>
       </column>
-      <column id="84" parent="16" name="slug">
+      <column id="93" parent="16" name="slug">
         <mandatory>1</mandatory>
         <data-type>varchar(255)|0</data-type>
       </column>
-      <column id="85" parent="16" name="description">
+      <column id="94" parent="16" name="description">
         <data-type>text|0</data-type>
       </column>
-      <column id="86" parent="16" name="created_at">
+      <column id="95" parent="16" name="created_at">
         <data-type>timestamp|0</data-type>
       </column>
-      <column id="87" parent="16" name="updated_at">
+      <column id="96" parent="16" name="updated_at">
         <data-type>timestamp|0</data-type>
       </column>
-      <index id="88" parent="16" name="permissions_slug_unique">
+      <index id="97" parent="16" name="permissions_slug_unique">
         <columns>slug</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="89" parent="16" name="PRIMARY">
+      <key id="98" parent="16" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <key id="90" parent="16" name="permissions_slug_unique">
+      <key id="99" parent="16" name="permissions_slug_unique">
         <columns>slug</columns>
         <underlying-index>permissions_slug_unique</underlying-index>
       </key>
-      <column id="91" parent="17" name="id">
+      <column id="100" parent="17" name="id">
         <mandatory>1</mandatory>
         <data-type>int(10) unsigned|0</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="92" parent="17" name="role_id">
+      <column id="101" parent="17" name="role_id">
         <mandatory>1</mandatory>
         <data-type>int(11)|0</data-type>
       </column>
-      <column id="93" parent="17" name="user_id">
+      <column id="102" parent="17" name="user_id">
         <mandatory>1</mandatory>
         <data-type>int(11)|0</data-type>
       </column>
-      <column id="94" parent="17" name="created_at">
+      <column id="103" parent="17" name="created_at">
         <data-type>timestamp|0</data-type>
       </column>
-      <column id="95" parent="17" name="updated_at">
+      <column id="104" parent="17" name="updated_at">
         <data-type>timestamp|0</data-type>
       </column>
-      <index id="96" parent="17" name="role_user_role_id_index">
+      <index id="105" parent="17" name="role_user_role_id_index">
         <columns>role_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="97" parent="17" name="role_user_user_id_index">
+      <index id="106" parent="17" name="role_user_user_id_index">
         <columns>user_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="98" parent="17" name="PRIMARY">
+      <key id="107" parent="17" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="99" parent="18" name="id">
+      <column id="108" parent="18" name="id">
         <mandatory>1</mandatory>
         <data-type>int(10) unsigned|0</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="100" parent="18" name="name">
+      <column id="109" parent="18" name="name">
         <mandatory>1</mandatory>
         <data-type>varchar(255)|0</data-type>
       </column>
-      <column id="101" parent="18" name="slug">
+      <column id="110" parent="18" name="slug">
         <mandatory>1</mandatory>
         <data-type>varchar(255)|0</data-type>
       </column>
-      <column id="102" parent="18" name="description">
+      <column id="111" parent="18" name="description">
         <data-type>text|0</data-type>
       </column>
-      <column id="103" parent="18" name="created_at">
+      <column id="112" parent="18" name="created_at">
         <data-type>timestamp|0</data-type>
       </column>
-      <column id="104" parent="18" name="updated_at">
+      <column id="113" parent="18" name="updated_at">
         <data-type>timestamp|0</data-type>
       </column>
-      <index id="105" parent="18" name="roles_slug_unique">
+      <index id="114" parent="18" name="roles_slug_unique">
         <columns>slug</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="106" parent="18" name="PRIMARY">
+      <key id="115" parent="18" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <key id="107" parent="18" name="roles_slug_unique">
+      <key id="116" parent="18" name="roles_slug_unique">
         <columns>slug</columns>
         <underlying-index>roles_slug_unique</underlying-index>
       </key>
-      <column id="108" parent="19" name="id">
+      <column id="117" parent="19" name="id">
         <mandatory>1</mandatory>
         <data-type>int(10) unsigned|0</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="109" parent="19" name="key">
+      <column id="118" parent="19" name="key">
         <data-type>varchar(100)|0</data-type>
       </column>
-      <column id="110" parent="19" name="value">
+      <column id="119" parent="19" name="value">
         <data-type>varchar(100)|0</data-type>
       </column>
-      <key id="111" parent="19" name="PRIMARY">
+      <key id="120" parent="19" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="112" parent="20" name="id">
+      <column id="121" parent="20" name="id">
         <mandatory>1</mandatory>
         <data-type>int(10) unsigned|0</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="113" parent="20" name="name">
+      <column id="122" parent="20" name="email">
         <mandatory>1</mandatory>
         <data-type>varchar(255)|0</data-type>
       </column>
-      <column id="114" parent="20" name="email">
+      <column id="123" parent="20" name="password">
         <mandatory>1</mandatory>
         <data-type>varchar(255)|0</data-type>
       </column>
-      <column id="115" parent="20" name="password">
-        <mandatory>1</mandatory>
-        <data-type>varchar(255)|0</data-type>
-      </column>
-      <column id="116" parent="20" name="remember_token">
+      <column id="124" parent="20" name="remember_token">
         <data-type>varchar(100)|0</data-type>
       </column>
-      <column id="117" parent="20" name="type">
+      <column id="125" parent="20" name="type">
         <mandatory>1</mandatory>
         <data-type>enum(&apos;P&apos;, &apos;O&apos;, &apos;D&apos;)|0</data-type>
       </column>
-      <column id="118" parent="20" name="status">
+      <column id="126" parent="20" name="status">
         <mandatory>1</mandatory>
         <data-type>enum(&apos;200&apos;, &apos;303&apos;, &apos;666&apos;)|0</data-type>
       </column>
-      <column id="119" parent="20" name="created_at">
+      <column id="127" parent="20" name="created_at">
         <data-type>timestamp|0</data-type>
       </column>
-      <column id="120" parent="20" name="updated_at">
+      <column id="128" parent="20" name="updated_at">
         <data-type>timestamp|0</data-type>
       </column>
-      <index id="121" parent="20" name="users_email_unique">
+      <column id="129" parent="20" name="deleted_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <index id="130" parent="20" name="users_email_unique">
         <columns>email</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="122" parent="20" name="PRIMARY">
+      <key id="131" parent="20" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <key id="123" parent="20" name="users_email_unique">
+      <key id="132" parent="20" name="users_email_unique">
         <columns>email</columns>
         <underlying-index>users_email_unique</underlying-index>
+      </key>
+      <column id="133" parent="21" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="134" parent="21" name="id_pasar">
+        <mandatory>1</mandatory>
+        <data-type>char(4)|0</data-type>
+      </column>
+      <column id="135" parent="21" name="id_dagang">
+        <mandatory>1</mandatory>
+        <data-type>char(12)|0</data-type>
+      </column>
+      <column id="136" parent="21" name="type">
+        <mandatory>1</mandatory>
+        <data-type>enum(&apos;PG&apos;, &apos;TG&apos;)|0</data-type>
+      </column>
+      <column id="137" parent="21" name="setor">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <column id="138" parent="21" name="created_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <column id="139" parent="21" name="created_by">
+        <mandatory>1</mandatory>
+        <data-type>int(10)|0</data-type>
+      </column>
+      <column id="140" parent="21" name="updated_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <column id="141" parent="21" name="deleted_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <key id="142" parent="21" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="143" parent="22" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="144" parent="22" name="id_pungutan">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)|0</data-type>
+      </column>
+      <column id="145" parent="22" name="sewa_tempat">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="146" parent="22" name="ppn">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="147" parent="22" name="jumlah">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="148" parent="22" name="created_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <column id="149" parent="22" name="created_by">
+        <mandatory>1</mandatory>
+        <data-type>int(10)|0</data-type>
+      </column>
+      <column id="150" parent="22" name="updated_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <column id="151" parent="22" name="deleted_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <index id="152" parent="22" name="FK_pungutan_bulanan_pungutan">
+        <columns>id_pungutan</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="153" parent="22" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="154" parent="22" name="FK_pungutan_bulanan_pungutan">
+        <columns>id_pungutan</columns>
+        <ref-key>~.pungutan.PRIMARY</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <column id="155" parent="23" name="id">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="156" parent="23" name="id_pungutan">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)|0</data-type>
+      </column>
+      <column id="157" parent="23" name="tempat_berjualan">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="158" parent="23" name="listrik">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="159" parent="23" name="air">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="160" parent="23" name="jumlah">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="161" parent="23" name="ppn">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="162" parent="23" name="total">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="163" parent="23" name="created_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <column id="164" parent="23" name="created_by">
+        <mandatory>1</mandatory>
+        <data-type>int(10)|0</data-type>
+      </column>
+      <column id="165" parent="23" name="updated_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <column id="166" parent="23" name="deleted_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <index id="167" parent="23" name="FK_pungutan_harian_pungutan">
+        <columns>id_pungutan</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="168" parent="23" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="169" parent="23" name="FK_pungutan_harian_pungutan">
+        <columns>id_pungutan</columns>
+        <ref-key>~.pungutan.PRIMARY</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <column id="170" parent="24" name="id">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+        <sequence-identity>1</sequence-identity>
+      </column>
+      <column id="171" parent="24" name="label">
+        <mandatory>1</mandatory>
+        <data-type>varchar(50)|0</data-type>
+      </column>
+      <column id="172" parent="24" name="tarif">
+        <mandatory>1</mandatory>
+        <data-type>int(11)|0</data-type>
+      </column>
+      <column id="173" parent="24" name="type">
+        <mandatory>1</mandatory>
+        <data-type>enum(&apos;HR&apos;, &apos;BL&apos;)|0</data-type>
+      </column>
+      <column id="174" parent="24" name="created_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <column id="175" parent="24" name="updated_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <column id="176" parent="24" name="created_by">
+        <mandatory>1</mandatory>
+        <data-type>int(10)|0</data-type>
+      </column>
+      <column id="177" parent="24" name="updated_by">
+        <data-type>int(10)|0</data-type>
+      </column>
+      <column id="178" parent="24" name="deleted_at">
+        <data-type>timestamp|0</data-type>
+      </column>
+      <key id="179" parent="24" name="PRIMARY">
+        <columns>id</columns>
+        <primary>1</primary>
       </key>
     </database-model>
   </data-source>

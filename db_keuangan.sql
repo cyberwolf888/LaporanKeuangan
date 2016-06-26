@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 21 Jun 2016 pada 21.30
+-- Generation Time: 26 Jun 2016 pada 08.47
 -- Versi Server: 10.1.13-MariaDB
 -- PHP Version: 7.0.5
 
@@ -46,8 +46,8 @@ CREATE TABLE `dagang` (
 --
 
 INSERT INTO `dagang` (`id`, `id_pasar`, `id_komoditas`, `nama_dagang`, `jenis_dagang`, `lokasi`, `status`, `created_at`, `updated_at`, `created_by`, `updated_by`, `deleted_at`) VALUES
-('DG1606000001', 'PS03', 3, 'Dagang Bunga', 'PN', 'deket parkiran', 'AP', '2016-06-21 19:03:41', '2016-06-21 19:18:38', 1, 1, NULL),
-('DG1606000002', 'PS01', 1, 'Kios Petra', 'KS', 'lantai 2', 'PD', '2016-06-21 19:13:09', '2016-06-21 19:13:38', 1, NULL, NULL),
+('DG1606000001', 'PS03', 3, 'Dagang Bunga', 'PN', 'deket parkiran', 'AP', '2016-06-21 19:03:41', '2016-06-23 06:22:12', 1, 1, NULL),
+('DG1606000002', 'PS01', 1, 'Kios Petra', 'KS', 'lantai 2', 'PD', '2016-06-21 19:13:09', '2016-06-23 06:14:17', 1, NULL, NULL),
 ('DG1606000003', 'PS03', 1, 'Kios Jagung', 'KS', 'lantai 3', 'PD', '2016-06-21 19:13:53', '2016-06-21 19:18:55', 1, 1, NULL);
 
 -- --------------------------------------------------------
@@ -73,7 +73,7 @@ CREATE TABLE `komoditas` (
 INSERT INTO `komoditas` (`id`, `nama_komoditas`, `created_at`, `updated_at`, `created_by`, `updated_by`, `deleted_at`) VALUES
 (1, 'Sembako', '2016-04-30 18:41:04', '2016-04-30 10:41:04', 1, 1, NULL),
 (2, 'Canang', '2016-04-30 10:13:06', '2016-04-30 10:13:06', 1, NULL, NULL),
-(3, 'Bunga', '2016-04-30 10:13:33', '2016-04-30 10:13:33', 1, NULL, NULL),
+(3, 'Bunga', '2016-06-23 06:22:31', '2016-06-23 06:22:12', 1, NULL, NULL),
 (8, 'Beras', '2016-04-30 10:51:28', '2016-04-30 10:51:28', 1, NULL, NULL),
 (9, 'Ransel', '2016-06-10 17:53:41', '2016-06-10 17:53:41', 1, 1, NULL),
 (10, 'Pangan', '2016-06-21 18:05:56', '2016-06-21 18:05:42', 1, 1, NULL);
@@ -110,7 +110,7 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 CREATE TABLE `pasar` (
   `id` char(4) NOT NULL,
   `nama_pasar` varchar(100) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_by` int(10) NOT NULL,
   `updated_by` int(10) DEFAULT NULL,
@@ -122,10 +122,12 @@ CREATE TABLE `pasar` (
 --
 
 INSERT INTO `pasar` (`id`, `nama_pasar`, `created_at`, `updated_at`, `created_by`, `updated_by`, `deleted_at`) VALUES
-('PS01', 'Pasar Badung', '2016-04-29 04:37:26', '2016-04-30 10:44:45', 1, 1, NULL),
+('PS01', 'Pasar Badung', '2016-04-29 04:37:26', '2016-06-23 06:14:17', 1, 1, NULL),
 ('PS02', 'Pasar Kreneng', '2016-04-29 04:37:41', '2016-06-21 18:08:11', 1, NULL, NULL),
 ('PS03', 'Pasar Sanglah', '2016-04-29 04:37:47', '2016-04-30 18:57:32', 1, 1, NULL),
-('PS04', 'Pasar Sempidi', '2016-05-07 11:10:04', '2016-05-07 11:10:04', 1, NULL, NULL);
+('PS04', 'Pasar Sempidi', '2016-05-07 11:10:04', '2016-05-07 11:10:04', 1, NULL, NULL),
+('PS05', 'Pasar Anyarsari', '2016-06-22 14:27:07', '2016-06-22 14:27:13', 1, NULL, NULL),
+('PS06', 'Pasar Kuning Sari', '2016-06-22 14:27:17', '2016-06-22 14:27:29', 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -148,6 +150,7 @@ CREATE TABLE `password_resets` (
 CREATE TABLE `pegawai` (
   `id` char(9) NOT NULL,
   `id_users` int(10) UNSIGNED NOT NULL,
+  `id_pasar` char(5) DEFAULT NULL,
   `nama_lengkap` varchar(50) NOT NULL,
   `jenis_kelamin` enum('P','L') NOT NULL,
   `alamat` varchar(100) NOT NULL,
@@ -164,9 +167,9 @@ CREATE TABLE `pegawai` (
 -- Dumping data untuk tabel `pegawai`
 --
 
-INSERT INTO `pegawai` (`id`, `id_users`, `nama_lengkap`, `jenis_kelamin`, `alamat`, `no_telp`, `photo`, `created_at`, `updated_at`, `created_by`, `updated_by`, `deleted_at`) VALUES
-('PG1604001', 1, 'Manik Anggara', 'L', 'Jalan Nangka Utara', '082247464196', NULL, '2016-06-21 17:36:15', NULL, 1, NULL, NULL),
-('PG1604002', 2, 'Petugas Manik', 'L', 'Jalan Ayani Utara', '085474121363', NULL, '2016-06-21 18:36:08', NULL, 1, NULL, NULL);
+INSERT INTO `pegawai` (`id`, `id_users`, `id_pasar`, `nama_lengkap`, `jenis_kelamin`, `alamat`, `no_telp`, `photo`, `created_at`, `updated_at`, `created_by`, `updated_by`, `deleted_at`) VALUES
+('PG1604001', 1, NULL, 'Manik Anggara', 'L', 'Jalan Nangka Utara', '082247464196', NULL, '2016-06-21 17:36:15', NULL, 1, NULL, NULL),
+('PG1604002', 2, 'PS03', 'Petugas Manik', 'L', 'Jalan Ayani Utara', '085474121363', NULL, '2016-06-23 16:20:39', NULL, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -196,6 +199,83 @@ CREATE TABLE `permission_role` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pungutan`
+--
+
+CREATE TABLE `pungutan` (
+  `id` bigint(20) NOT NULL,
+  `id_pasar` char(4) NOT NULL,
+  `id_dagang` char(12) NOT NULL,
+  `type` enum('PG','TG') NOT NULL,
+  `setor` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `created_by` int(10) NOT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pungutan`
+--
+
+INSERT INTO `pungutan` (`id`, `id_pasar`, `id_dagang`, `type`, `setor`, `created_at`, `created_by`, `updated_at`, `deleted_at`) VALUES
+(3, 'PS03', 'DG1606000003', 'PG', NULL, '2016-06-24 05:01:43', 2, '2016-06-24 05:01:43', NULL),
+(5, 'PS03', 'DG1606000001', 'PG', NULL, '2016-06-24 05:51:38', 2, '2016-06-24 05:51:38', NULL),
+(6, 'PS03', 'DG1606000001', 'PG', NULL, '2016-06-25 09:16:24', 2, '2016-06-25 09:16:24', NULL),
+(7, 'PS03', 'DG1606000003', 'PG', NULL, '2016-06-25 09:16:28', 2, '2016-06-25 09:16:28', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pungutan_bulanan`
+--
+
+CREATE TABLE `pungutan_bulanan` (
+  `id` bigint(20) NOT NULL,
+  `id_pungutan` bigint(20) NOT NULL,
+  `sewa_tempat` int(11) NOT NULL,
+  `ppn` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `created_by` int(10) NOT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pungutan_harian`
+--
+
+CREATE TABLE `pungutan_harian` (
+  `id` bigint(20) NOT NULL,
+  `id_pungutan` bigint(20) NOT NULL,
+  `tempat_berjualan` int(11) NOT NULL,
+  `listrik` int(11) NOT NULL,
+  `air` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `ppn` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `created_by` int(10) NOT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pungutan_harian`
+--
+
+INSERT INTO `pungutan_harian` (`id`, `id_pungutan`, `tempat_berjualan`, `listrik`, `air`, `jumlah`, `ppn`, `total`, `created_at`, `created_by`, `updated_at`, `deleted_at`) VALUES
+(1, 3, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-24 05:01:43', 2, '2016-06-24 05:01:43', NULL),
+(3, 5, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-24 05:51:38', 2, '2016-06-24 05:51:38', NULL),
+(4, 6, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-25 09:16:24', 2, '2016-06-25 09:16:24', NULL),
+(5, 7, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-25 09:16:28', 2, '2016-06-25 09:16:28', NULL);
 
 -- --------------------------------------------------------
 
@@ -258,6 +338,33 @@ CREATE TABLE `settings` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tarif`
+--
+
+CREATE TABLE `tarif` (
+  `id` int(11) NOT NULL,
+  `label` varchar(50) NOT NULL,
+  `tarif` int(11) NOT NULL,
+  `type` enum('HR','BL') NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_by` int(10) NOT NULL,
+  `updated_by` int(10) DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tarif`
+--
+
+INSERT INTO `tarif` (`id`, `label`, `tarif`, `type`, `created_at`, `updated_at`, `created_by`, `updated_by`, `deleted_at`) VALUES
+(1, 'Tempat Berjualan', 2500, 'HR', '2016-06-24 04:31:55', NULL, 1, NULL, NULL),
+(2, 'Listrik', 2000, 'HR', '2016-06-24 04:36:51', NULL, 1, NULL, NULL),
+(3, 'Air', 1000, 'HR', '2016-06-24 04:37:30', NULL, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `users`
 --
 
@@ -278,8 +385,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `type`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'operator@mail.com', '$2y$10$SBGUtP4jIp5aOnt1HgVwU.D8uASzapMM3Zry5MasszxqkATwFqeDC', '9UIqbNk3m2NxZefCNL2i1td6xPK5jMyWyDNGXpzATziGXNszC02RABQu6p86', 'O', '200', '2016-04-22 06:20:11', '2016-06-21 19:29:46', NULL),
-(2, 'petugas@mail.com', '$2y$10$8hFOBK0r7mTVUGQgYT5g8.901Ngw/YncTfZrSOxEwQhRBtJiuxr.u', '1ECIzJqYk36BCXaQBL8dWUrjJqKU4GM3foFJpx6SKWIPfnKMgZeYkTR6Y24s', 'P', '200', '2016-04-22 08:46:14', '2016-06-21 18:49:25', NULL);
+(1, 'operator@mail.com', '$2y$10$SBGUtP4jIp5aOnt1HgVwU.D8uASzapMM3Zry5MasszxqkATwFqeDC', 'NqIhUnkkHGHAG4AFfsHremWsoReFm6HorXyodaU4eYl7sGY4Pruj3rYQFsb3', 'O', '200', '2016-04-22 06:20:11', '2016-06-23 06:22:57', NULL),
+(2, 'petugas@mail.com', '$2y$10$8hFOBK0r7mTVUGQgYT5g8.901Ngw/YncTfZrSOxEwQhRBtJiuxr.u', '8EntSwMTnnHqIKtSXHVILfNoa6GkESJp6ntwoTlv8shXHlffBLf6Oi7735kj', 'P', '200', '2016-04-22 08:46:14', '2016-06-21 19:33:26', NULL);
 
 --
 -- Indexes for dumped tables
@@ -336,6 +443,26 @@ ALTER TABLE `permission_role`
   ADD KEY `permission_role_role_id_index` (`role_id`);
 
 --
+-- Indexes for table `pungutan`
+--
+ALTER TABLE `pungutan`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pungutan_bulanan`
+--
+ALTER TABLE `pungutan_bulanan`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_pungutan_bulanan_pungutan` (`id_pungutan`);
+
+--
+-- Indexes for table `pungutan_harian`
+--
+ALTER TABLE `pungutan_harian`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_pungutan_harian_pungutan` (`id_pungutan`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
@@ -354,6 +481,12 @@ ALTER TABLE `role_user`
 -- Indexes for table `settings`
 --
 ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tarif`
+--
+ALTER TABLE `tarif`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -383,6 +516,21 @@ ALTER TABLE `permissions`
 ALTER TABLE `permission_role`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `pungutan`
+--
+ALTER TABLE `pungutan`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `pungutan_bulanan`
+--
+ALTER TABLE `pungutan_bulanan`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `pungutan_harian`
+--
+ALTER TABLE `pungutan_harian`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
@@ -397,6 +545,11 @@ ALTER TABLE `role_user`
 --
 ALTER TABLE `settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tarif`
+--
+ALTER TABLE `tarif`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --
@@ -418,6 +571,18 @@ ALTER TABLE `dagang`
 --
 ALTER TABLE `pegawai`
   ADD CONSTRAINT `FK_pegawai_users` FOREIGN KEY (`id_users`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ketidakleluasaan untuk tabel `pungutan_bulanan`
+--
+ALTER TABLE `pungutan_bulanan`
+  ADD CONSTRAINT `FK_pungutan_bulanan_pungutan` FOREIGN KEY (`id_pungutan`) REFERENCES `pungutan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Ketidakleluasaan untuk tabel `pungutan_harian`
+--
+ALTER TABLE `pungutan_harian`
+  ADD CONSTRAINT `FK_pungutan_harian_pungutan` FOREIGN KEY (`id_pungutan`) REFERENCES `pungutan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -35,6 +35,20 @@ Route::group(['middleware' => ['auth', 'rbac:is,petugas'], 'prefix' => 'petugas'
 
     Route::get('/',['as'=>'dashboard','uses'=>'Petugas\DashboardController@index']);
 
+    Route::group(['prefix'=>'pungutan', 'as'=>'pungutan'], function () {
+    Route::get('/getDagang/{id}',['uses'=>'Petugas\PungutanController@getDagang']);
+
+        Route::group(['prefix'=>'harian', 'as'=>'.harian'], function () {
+            Route::get('/',['uses'=>'Petugas\PungutanController@indexHarian']);
+            Route::get('/create',['uses'=>'Petugas\PungutanController@createHarian']);
+            Route::post('/create',['uses'=>'Petugas\PungutanController@storeHarian']);
+        });
+
+        Route::group(['prefix'=>'bulanan', 'as'=>'.bulanan'], function () {
+            Route::get('/',['uses'=>'Petugas\PungutanController@indexBulanan']);
+        });
+
+    });
 });
 
 /*

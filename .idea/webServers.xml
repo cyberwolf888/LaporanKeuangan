@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="84f21862-c457-42a6-9905-1f57a7eace11" name="laporankeuangan" url="http://laporankeuangan.esy.es">
+        <fileTransfer host="laporankeuangan.esy.es" port="21" rootFolder="/public_html" password="dfc7dfcbdfd9dfdedfcfdfd8df92df92df92" username="u256809116">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

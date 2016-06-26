@@ -52,7 +52,7 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group form-md-line-input form-md-floating-label">
-                    {!! Form::select('jenis_dagang', [\App\Models\Dagang::JN_KS=>'Kios', \App\Models\Dagang::JN_PN=>'Penataran'], $model->jenis_dagang, ['class' => 'form-control', 'id'=>'jenis_dagang']) !!}
+                    {!! Form::select('jenis_dagang', [\App\Models\Dagang::JN_KS=>'Kios', \App\Models\Dagang::JN_PN=>'Pelataran'], $model->jenis_dagang, ['class' => 'form-control', 'id'=>'jenis_dagang']) !!}
                     {!! Form::Label('jenis_dagang', 'Jenis Dagang') !!}
                 </div>
             </div>
@@ -96,7 +96,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $("#id_pasar").select2();
-        $("#komoditas").select2();
+        $("#id_komoditas").select2();
     });
 </script>
 <script>

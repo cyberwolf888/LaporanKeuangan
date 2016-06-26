@@ -16,11 +16,24 @@
     <li class="heading">
         <h3 class="uppercase">Manage Data</h3>
     </li>
-    <li class="nav-item @if (Route::currentRouteName() === 'iuran') active @endif">
-        <a href="{{ url('/petugas/iuran/harian') }}" class="nav-link">
-            <i class="icon-diamond"></i>
-            <span class="title">Iuran</span>
+    <li class="nav-item @if (str_is('pungutan*', Route::currentRouteName())) active @endif">
+        <a href="javascript:;" class="nav-link nav-toggle">
+            <i class="icon-notebook"></i>
+            <span class="title">Pungutan</span>
+            <span class="arrow"></span>
         </a>
+        <ul class="sub-menu">
+            <li class="nav-item @if (Route::currentRouteName() === 'pungutan.harian') active @endif">
+                <a href="{{ url('/petugas/pungutan/harian') }}" class="nav-link ">
+                    <span class="title">Harian</span>
+                </a>
+            </li>
+            <li class="nav-item  ">
+                <a href="{{ url('/petugas/pungutan/bulanan') }}" class="nav-link ">
+                    <span class="title">Bulanan</span>
+                </a>
+            </li>
+        </ul>
     </li>
 
     <li class="heading">

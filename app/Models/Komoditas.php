@@ -23,4 +23,19 @@ class Komoditas extends Model
             'nama_komoditas' => 'required|max:100'
         ]);
     }
+
+    public function dagang()
+    {
+        return $this->hasMany('App\Models\Dagang', 'id_komoditas');
+    }
+
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($model) {
+            foreach ($model->dagang()->get() as $value) {
+                $value->delete();
+            }
+        });
+    }
 }

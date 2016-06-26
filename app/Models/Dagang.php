@@ -28,6 +28,9 @@ class Dagang extends Model
     public function validator(array $data)
     {
         return Validator::make($data, [
+            'id_pasar' => 'required',
+            'id_komoditas' => 'required',
+            'jenis_dagang' => 'required',
             'nama_dagang' => 'required|max:100',
             'lokasi' => 'required|max:100'
         ]);
@@ -55,18 +58,18 @@ class Dagang extends Model
 
     public static function getLabelJenis($index)
     {
-        $jenis = [Dagang::JN_PN=>"Penataran",Dagang::JN_KS=>"Kios"];
+        $jenis = [Dagang::JN_PN=>"Pelataran",Dagang::JN_KS=>"Kios"];
 
         return $jenis[$index];
     }
 
     public function pasar()
     {
-        return $this->hasOne('App\Models\Pasar', 'id_pasar');
+        return $this->belongsTo('App\Models\Pasar', 'id_pasar');
     }
 
     public function komoditas()
     {
-        return $this->hasOne('App\Models\Komoditas', 'id_komoditas');
+        return $this->belongsTo('App\Models\Komoditas', 'id_komoditas');
     }
 }
