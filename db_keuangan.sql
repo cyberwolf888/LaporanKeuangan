@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 26 Jun 2016 pada 08.47
+-- Generation Time: 28 Jun 2016 pada 10.12
 -- Versi Server: 10.1.13-MariaDB
 -- PHP Version: 7.0.5
 
@@ -210,8 +210,11 @@ CREATE TABLE `pungutan` (
   `id` bigint(20) NOT NULL,
   `id_pasar` char(4) NOT NULL,
   `id_dagang` char(12) NOT NULL,
+  `tgl_pungutan` date NOT NULL,
   `type` enum('PG','TG') NOT NULL,
-  `setor` timestamp NULL DEFAULT NULL,
+  `deposited` timestamp NULL DEFAULT NULL,
+  `deposited_to` int(10) DEFAULT NULL,
+  `detail` enum('HR','BL') DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `created_by` int(10) NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -222,11 +225,25 @@ CREATE TABLE `pungutan` (
 -- Dumping data untuk tabel `pungutan`
 --
 
-INSERT INTO `pungutan` (`id`, `id_pasar`, `id_dagang`, `type`, `setor`, `created_at`, `created_by`, `updated_at`, `deleted_at`) VALUES
-(3, 'PS03', 'DG1606000003', 'PG', NULL, '2016-06-24 05:01:43', 2, '2016-06-24 05:01:43', NULL),
-(5, 'PS03', 'DG1606000001', 'PG', NULL, '2016-06-24 05:51:38', 2, '2016-06-24 05:51:38', NULL),
-(6, 'PS03', 'DG1606000001', 'PG', NULL, '2016-06-25 09:16:24', 2, '2016-06-25 09:16:24', NULL),
-(7, 'PS03', 'DG1606000003', 'PG', NULL, '2016-06-25 09:16:28', 2, '2016-06-25 09:16:28', NULL);
+INSERT INTO `pungutan` (`id`, `id_pasar`, `id_dagang`, `tgl_pungutan`, `type`, `deposited`, `deposited_to`, `detail`, `created_at`, `created_by`, `updated_at`, `deleted_at`) VALUES
+(12, 'PS03', 'DG1606000001', '2016-06-27', 'PG', NULL, NULL, 'HR', '2016-06-27 12:23:23', 2, '2016-06-27 12:23:23', NULL),
+(13, 'PS03', 'DG1606000003', '2016-06-27', 'PG', NULL, NULL, 'HR', '2016-06-27 12:23:43', 2, '2016-06-27 12:23:43', NULL),
+(14, 'PS03', 'DG1606000003', '2016-06-26', 'TG', NULL, NULL, 'HR', '2016-06-27 16:21:52', 2, '2016-06-27 16:21:52', NULL),
+(16, 'PS03', 'DG1606000001', '2016-06-26', 'TG', NULL, NULL, 'HR', '2016-06-27 16:25:06', 2, '2016-06-27 16:25:06', NULL),
+(18, 'PS03', 'DG1606000001', '2016-06-21', 'TG', NULL, NULL, 'HR', '2016-06-28 06:10:33', 2, '2016-06-28 06:10:33', NULL),
+(19, 'PS03', 'DG1606000003', '2016-06-21', 'TG', NULL, NULL, 'HR', '2016-06-28 06:10:37', 2, '2016-06-28 06:10:37', NULL),
+(20, 'PS03', 'DG1606000001', '2016-06-20', 'TG', NULL, NULL, 'HR', '2016-06-28 06:11:41', 2, '2016-06-28 06:11:41', NULL),
+(21, 'PS03', 'DG1606000003', '2016-06-20', 'TG', NULL, NULL, 'HR', '2016-06-28 06:11:49', 2, '2016-06-28 06:11:49', NULL),
+(22, 'PS03', 'DG1606000001', '2016-06-15', 'TG', NULL, NULL, 'HR', '2016-06-28 06:13:58', 2, '2016-06-28 06:13:58', NULL),
+(23, 'PS03', 'DG1606000003', '2016-06-15', 'TG', NULL, NULL, 'HR', '2016-06-28 06:14:50', 2, '2016-06-28 06:14:50', NULL),
+(24, 'PS03', 'DG1606000003', '2016-06-16', 'TG', NULL, NULL, 'HR', '2016-06-28 06:15:45', 2, '2016-06-28 06:15:45', NULL),
+(25, 'PS03', 'DG1606000001', '2016-06-28', 'PG', NULL, NULL, 'HR', '2016-06-28 06:18:03', 2, '2016-06-28 06:18:03', NULL),
+(26, 'PS03', 'DG1606000003', '2016-06-28', 'PG', NULL, NULL, 'HR', '2016-06-28 06:18:06', 2, '2016-06-28 06:18:06', NULL),
+(27, 'PS03', 'DG1606000001', '2016-06-06', 'TG', NULL, NULL, 'HR', '2016-06-28 07:15:06', 2, '2016-06-28 07:15:06', NULL),
+(28, 'PS03', 'DG1606000001', '2016-06-28', 'PG', NULL, NULL, 'BL', '2016-06-28 07:15:47', 2, '2016-06-28 07:15:47', NULL),
+(29, 'PS03', 'DG1606000003', '2016-06-28', 'PG', NULL, NULL, 'BL', '2016-06-28 07:24:51', 2, '2016-06-28 07:24:51', NULL),
+(30, 'PS03', 'DG1606000001', '2016-05-28', 'TG', NULL, NULL, 'BL', '2016-06-28 08:04:35', 2, '2016-06-28 08:04:35', NULL),
+(31, 'PS03', 'DG1606000003', '2016-05-28', 'TG', NULL, NULL, 'BL', '2016-06-28 08:04:51', 2, '2016-06-28 08:04:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -239,12 +256,22 @@ CREATE TABLE `pungutan_bulanan` (
   `id_pungutan` bigint(20) NOT NULL,
   `sewa_tempat` int(11) NOT NULL,
   `ppn` int(11) NOT NULL,
-  `jumlah` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `created_by` int(10) NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pungutan_bulanan`
+--
+
+INSERT INTO `pungutan_bulanan` (`id`, `id_pungutan`, `sewa_tempat`, `ppn`, `total`, `created_at`, `created_by`, `updated_at`, `deleted_at`) VALUES
+(1, 28, 54000, 5400, 59400, '2016-06-28 07:15:47', 2, '2016-06-28 07:15:47', NULL),
+(2, 29, 54000, 5400, 59400, '2016-06-28 07:24:51', 2, '2016-06-28 07:24:51', NULL),
+(3, 30, 54000, 5400, 59400, '2016-06-28 08:04:35', 2, '2016-06-28 08:04:35', NULL),
+(4, 31, 54000, 5400, 59400, '2016-06-28 08:04:51', 2, '2016-06-28 08:04:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -272,10 +299,20 @@ CREATE TABLE `pungutan_harian` (
 --
 
 INSERT INTO `pungutan_harian` (`id`, `id_pungutan`, `tempat_berjualan`, `listrik`, `air`, `jumlah`, `ppn`, `total`, `created_at`, `created_by`, `updated_at`, `deleted_at`) VALUES
-(1, 3, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-24 05:01:43', 2, '2016-06-24 05:01:43', NULL),
-(3, 5, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-24 05:51:38', 2, '2016-06-24 05:51:38', NULL),
-(4, 6, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-25 09:16:24', 2, '2016-06-25 09:16:24', NULL),
-(5, 7, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-25 09:16:28', 2, '2016-06-25 09:16:28', NULL);
+(1, 12, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-27 12:23:23', 2, '2016-06-27 12:23:23', NULL),
+(2, 13, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-27 12:23:43', 2, '2016-06-27 12:23:43', NULL),
+(3, 14, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-27 16:21:52', 2, '2016-06-27 16:21:52', NULL),
+(5, 16, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-27 16:25:06', 2, '2016-06-27 16:25:06', NULL),
+(7, 18, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-28 06:10:33', 2, '2016-06-28 06:10:33', NULL),
+(8, 19, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-28 06:10:37', 2, '2016-06-28 06:10:37', NULL),
+(9, 20, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-28 06:11:41', 2, '2016-06-28 06:11:41', NULL),
+(10, 21, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-28 06:11:49', 2, '2016-06-28 06:11:49', NULL),
+(11, 22, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-28 06:13:58', 2, '2016-06-28 06:13:58', NULL),
+(12, 23, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-28 06:14:50', 2, '2016-06-28 06:14:50', NULL),
+(13, 24, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-28 06:15:45', 2, '2016-06-28 06:15:45', NULL),
+(14, 25, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-28 06:18:03', 2, '2016-06-28 06:18:03', NULL),
+(15, 26, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-28 06:18:06', 2, '2016-06-28 06:18:06', NULL),
+(16, 27, 2500, 2000, 1000, 5500, 550, 6050, '2016-06-28 07:15:06', 2, '2016-06-28 07:15:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -360,7 +397,8 @@ CREATE TABLE `tarif` (
 INSERT INTO `tarif` (`id`, `label`, `tarif`, `type`, `created_at`, `updated_at`, `created_by`, `updated_by`, `deleted_at`) VALUES
 (1, 'Tempat Berjualan', 2500, 'HR', '2016-06-24 04:31:55', NULL, 1, NULL, NULL),
 (2, 'Listrik', 2000, 'HR', '2016-06-24 04:36:51', NULL, 1, NULL, NULL),
-(3, 'Air', 1000, 'HR', '2016-06-24 04:37:30', NULL, 1, NULL, NULL);
+(3, 'Air', 1000, 'HR', '2016-06-24 04:37:30', NULL, 1, NULL, NULL),
+(4, 'Sewa Tempat', 54000, 'BL', '2016-06-28 06:38:01', NULL, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -385,8 +423,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `type`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'operator@mail.com', '$2y$10$SBGUtP4jIp5aOnt1HgVwU.D8uASzapMM3Zry5MasszxqkATwFqeDC', 'NqIhUnkkHGHAG4AFfsHremWsoReFm6HorXyodaU4eYl7sGY4Pruj3rYQFsb3', 'O', '200', '2016-04-22 06:20:11', '2016-06-23 06:22:57', NULL),
-(2, 'petugas@mail.com', '$2y$10$8hFOBK0r7mTVUGQgYT5g8.901Ngw/YncTfZrSOxEwQhRBtJiuxr.u', '8EntSwMTnnHqIKtSXHVILfNoa6GkESJp6ntwoTlv8shXHlffBLf6Oi7735kj', 'P', '200', '2016-04-22 08:46:14', '2016-06-21 19:33:26', NULL);
+(1, 'operator@mail.com', '$2y$10$SBGUtP4jIp5aOnt1HgVwU.D8uASzapMM3Zry5MasszxqkATwFqeDC', 'Qhzm8tVWKzRYpWZlKglWYHgwR1Glm9CCv0Beg8egBcw3QorhvEB3zgzgB3YD', 'O', '200', '2016-04-22 06:20:11', '2016-06-27 12:33:05', NULL),
+(2, 'petugas@mail.com', '$2y$10$8hFOBK0r7mTVUGQgYT5g8.901Ngw/YncTfZrSOxEwQhRBtJiuxr.u', '2ktdbhterXXGdNageGOtLrZ5023pPauUKh6OLsLVD9ZH3Lz3rXK7b20QH8LO', 'P', '200', '2016-04-22 08:46:14', '2016-06-28 08:06:25', NULL);
 
 --
 -- Indexes for dumped tables
@@ -519,17 +557,17 @@ ALTER TABLE `permission_role`
 -- AUTO_INCREMENT for table `pungutan`
 --
 ALTER TABLE `pungutan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `pungutan_bulanan`
 --
 ALTER TABLE `pungutan_bulanan`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `pungutan_harian`
 --
 ALTER TABLE `pungutan_harian`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `roles`
 --
@@ -549,7 +587,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `tarif`
 --
 ALTER TABLE `tarif`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `users`
 --
