@@ -47,42 +47,19 @@
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group form-md-line-input">
-                    {!! Form::number('tempat_berjualan', $tarif->find(1)->tarif, ['class' => 'form-control', 'id'=>'tempat_berjualan', 'min'=>0]) !!}
-                    {!! Form::Label('tempat_berjualan', 'Tempat Berjualan') !!}
+                    {!! Form::number('sewa_tempat', $tarif->find(4)->tarif, ['class' => 'form-control', 'id'=>'sewa_tempat', 'min'=>0]) !!}
+                    {!! Form::Label('sewa_tempat', 'Sewa Tempat') !!}
                 </div>
 
             </div>
-            <div class="col-md-6">
-                <div class="form-group form-md-line-input">
-                    {!! Form::number('listrik', $tarif->find(2)->tarif, ['class' => 'form-control', 'id'=>'listrik', 'min'=>0]) !!}
-                    {!! Form::Label('listrik', 'Pungutan Listrik') !!}
-                </div>
-
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="form-group form-md-line-input">
-                    {!! Form::number('air', $tarif->find(3)->tarif, ['class' => 'form-control', 'id'=>'air', 'min'=>0]) !!}
-                    {!! Form::Label('air', 'Pungutan Air') !!}
-                </div>
-
-            </div>
-            <div class="col-md-6">
-                <div class="form-group form-md-line-input">
-                    {!! Form::number('jumlah', null, ['class' => 'form-control', 'id'=>'jumlah', 'min'=>0, 'disabled']) !!}
-                    {!! Form::Label('jumlah', 'Jumlah') !!}
-                </div>
-
-            </div>
-        </div>
-        <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group form-md-line-input">
                     {!! Form::number('ppn', null, ['class' => 'form-control', 'id'=>'ppn', 'min'=>0, 'disabled']) !!}
                     {!! Form::Label('ppn', 'PPN 10%') !!}
                 </div>
             </div>
+        </div>
+        <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group form-md-line-input">
                     {!! Form::number('total', null, ['class' => 'form-control', 'id'=>'total', 'min'=>0, 'disabled']) !!}
@@ -94,13 +71,11 @@
             <div class="col-md-6">
                 <div class="form-actions noborder">
                     <button type="submit" class="btn blue">Submit</button>
-                    <a href="{{ url('/petugas/pungutan/harian') }}" class="btn default">Cancel</a>
+                    <a href="{{ url('/petugas/pungutan/bulanan') }}" class="btn default">Cancel</a>
                 </div>
             </div>
         </div>
-
     </div>
-
 </form>
 </div>
 
@@ -114,33 +89,20 @@
     $(document).ready(function() {
         $("#id_dagang").select2();
 
-        var tempat_berjualan = $("#tempat_berjualan").val();
-        var listrik = $("#listrik").val();
-        var air = $("#air").val();
+        var sewa_tempat = $("#sewa_tempat").val();
 
         function setTotal() {
-            var jumlah = null;
             var ppn = null;
             var total = null;
 
-            jumlah = Number(tempat_berjualan)+Number(listrik)+Number(air);
-            ppn = Number(jumlah)*Number(10)/Number(100);
-            total = Number(jumlah)+Number(ppn);
+            ppn = Number(sewa_tempat)*Number(10)/Number(100);
+            total = Number(sewa_tempat)+Number(ppn);
 
-            $("#jumlah").val(jumlah);
             $("#ppn").val(ppn);
             $("#total").val(total);
         };
-        $("#tempat_berjualan").change(function () {
-            tempat_berjualan = $(this).val();
-            setTotal();
-        });
-        $("#listrik").change(function () {
-            listrik = $(this).val();
-            setTotal();
-        });
-        $("#air").change(function () {
-            air = $(this).val();
+        $("#sewa_tempat").change(function () {
+            sewa_tempat = $(this).val();
             setTotal();
         });
         setTotal();
@@ -161,9 +123,7 @@
                 ignore:"",
                 rules:
                 {
-                    tempat_berjualan:{required:!0},
-                    listrik:{required:!0},
-                    air:{required:!0}
+                    sewa_tempat:{required:!0}
                 },
                 invalidHandler:function(e,t){
                     i.hide(),

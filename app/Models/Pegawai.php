@@ -12,4 +12,9 @@ class Pegawai extends Model
     {
         return $this->belongsTo('App\User', 'id_users');
     }
+
+    public function pasar()
+    {
+        return $this->belongsTo('App\Models\Pasar', 'id_pasar');
+    }
 }

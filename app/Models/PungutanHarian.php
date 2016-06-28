@@ -20,4 +20,9 @@ class PungutanHarian extends Model
             'air' => 'required|numeric'
         ]);
     }
+
+    public function pungutan()
+    {
+        return $this->belongsTo('App\Models\Pungutan', 'id_pungutan');
+    }
 }

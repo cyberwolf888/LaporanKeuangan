@@ -68,6 +68,11 @@ class Dagang extends Model
         return $this->belongsTo('App\Models\Pasar', 'id_pasar');
     }
 
+    public function pungutan()
+    {
+        return $this->belongsTo('App\Models\Dagang', 'id_dagang');
+    }
+
     public function komoditas()
     {
         return $this->belongsTo('App\Models\Komoditas', 'id_komoditas');

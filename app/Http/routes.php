@@ -36,18 +36,37 @@ Route::group(['middleware' => ['auth', 'rbac:is,petugas'], 'prefix' => 'petugas'
     Route::get('/',['as'=>'dashboard','uses'=>'Petugas\DashboardController@index']);
 
     Route::group(['prefix'=>'pungutan', 'as'=>'pungutan'], function () {
-    Route::get('/getDagang/{id}',['uses'=>'Petugas\PungutanController@getDagang']);
+    //Route::get('/getDagang/{id}',['uses'=>'Petugas\PungutanController@getDagang']);
 
         Route::group(['prefix'=>'harian', 'as'=>'.harian'], function () {
             Route::get('/',['uses'=>'Petugas\PungutanController@indexHarian']);
             Route::get('/create',['uses'=>'Petugas\PungutanController@createHarian']);
             Route::post('/create',['uses'=>'Petugas\PungutanController@storeHarian']);
+            Route::get('/datatable',['uses'=>'Petugas\PungutanController@dataTableHarian', 'middleware' => 'ajax']);
+            Route::get('/detail/{id}',['uses'=>'Petugas\PungutanController@showHarian']);
         });
 
         Route::group(['prefix'=>'bulanan', 'as'=>'.bulanan'], function () {
             Route::get('/',['uses'=>'Petugas\PungutanController@indexBulanan']);
+            Route::get('/create',['uses'=>'Petugas\PungutanController@createBulanan']);
+            Route::post('/create',['uses'=>'Petugas\PungutanController@storeBulanan']);
+            Route::get('/datatable',['uses'=>'Petugas\PungutanController@dataTableBulanan']);
+            Route::get('/detail/{id}',['uses'=>'Petugas\PungutanController@showBulanan']);
         });
 
+    });
+
+    Route::group(['prefix'=>'tunggakan', 'as'=>'tunggakan'], function () {
+        Route::group(['prefix'=>'harian', 'as'=>'.harian'], function () {
+            Route::get('/create',['uses'=>'Petugas\PungutanController@createTunggakanHarian']);
+            Route::get('/create/{date}',['uses'=>'Petugas\PungutanController@createTunggakanHarian']);
+            Route::post('/create/{date}',['uses'=>'Petugas\PungutanController@storeTunggakanHarian']);
+        });
+        Route::group(['prefix'=>'bulanan', 'as'=>'.bulanan'], function () {
+            Route::get('/create',['uses'=>'Petugas\PungutanController@createTunggakanBulanan']);
+            Route::get('/create/{date}',['uses'=>'Petugas\PungutanController@createTunggakanBulanan']);
+            Route::post('/create/{date}',['uses'=>'Petugas\PungutanController@storeTunggakanBulanan']);
+        });
     });
 });
 

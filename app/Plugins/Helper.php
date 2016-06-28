@@ -37,11 +37,21 @@ class Helper {
         return $data;
     }
 
-    public static function registerDatatablesScript($id, $ajax, $columns, $id_button = null)
+    public static function registerDatatablesScript($id, $ajax, $columns, $id_button = null, $order=null)
     {
         $id_button = $id_button==null ? $id.'_tools' : $id_button;
         $columns = json_encode($columns);
-
+        if(is_array($order)){
+            $_order = '[';
+            foreach ($order as $key=>$value){
+                foreach ($value as $key=>$final){
+                    $_order.='['.$key.',"'.$final.'"]';
+                }
+            }
+            $_order.=']';
+        }else{
+            $_order = '[[0,"asc"]]';
+        }
         $script = '<script type="text/javascript">
         var TableDatatablesButtons = function(){
                     a=function(){
@@ -73,7 +83,7 @@ class Helper {
                                 {extend:"colvis",className:"btn dark btn-outline",text:"Columns"}
                             ],
                             //responsive:!0,
-                            order:[[0,"asc"]],
+                            order:'.$_order.',
                             //lengthMenu:[[5,10,15,20,-1],[5,10,15,20,"All"]],
                             pageLength:10
                         });
@@ -129,6 +139,12 @@ class Helper {
         $data = Helper::registerJs('/global/plugins/jquery-validation/js/jquery.validate.min.js') ;
         $data.= Helper::registerJs('/global/plugins/jquery-validation/js/additional-methods.min.js');
         return $data;
+    }
+
+    public static function formatMoney($money)
+    {
+        $return = "Rp. ".number_format($money,0,',','.');
+        return $return;
     }
     
 }

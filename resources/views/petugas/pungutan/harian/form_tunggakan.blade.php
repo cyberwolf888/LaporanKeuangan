@@ -1,23 +1,23 @@
 @if($errors->any())
-    <div class="col-md-12">
-        <div class="alert alert-danger">
-            <button class="close" data-close="alert"></button>
-            <span> Please fix this folowing error: </span>
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+<div class="col-md-12">
+    <div class="alert alert-danger">
+        <button class="close" data-close="alert"></button>
+        <span> Please fix this folowing error: </span>
+        <ul>
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
+</div>
 @endif
 @if(Session::has('success_message'))
-    <div class="col-md-12">
-        <div class="alert alert-success">
-            <button class="close" data-close="alert"></button>
-            <span> {{ Session::get('success_message') }} </span>
-        </div>
+<div class="col-md-12">
+    <div class="alert alert-success">
+        <button class="close" data-close="alert"></button>
+        <span> {{ Session::get('success_message') }} </span>
     </div>
+</div>
 @endif
 
 <form role="form" id="form_data" action="" method="post">
@@ -28,6 +28,7 @@
         </div>
     </div>
     {!! csrf_field() !!}
+    {!! Form::hidden('tgl_pungutan', Carbon\Carbon::createFromFormat('d-m-Y', $date)->format('Y-m-d'),[ 'id'=>'tgl_pungutan']) !!}
     <div class="form-body">
         <div class="col-md-12">
             <div class="col-md-6">
@@ -152,8 +153,8 @@
         i=function()
         {
             var e=$("#form_data"),
-                    r=$(".alert-danger",e),
-                    i=$(".alert-success",e);
+                r=$(".alert-danger",e),
+                i=$(".alert-success",e);
             e.validate({
                 errorElement:"span",
                 errorClass:"help-block",
@@ -167,8 +168,8 @@
                 },
                 invalidHandler:function(e,t){
                     i.hide(),
-                            r.show(),
-                            App.scrollTo(r,-200)
+                        r.show(),
+                        App.scrollTo(r,-200)
                 },
                 errorPlacement:function(e,r)
                 {

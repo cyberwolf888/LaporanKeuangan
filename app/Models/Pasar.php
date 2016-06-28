@@ -43,6 +43,16 @@ class Pasar extends Model
         return $this->hasMany('App\Models\Dagang', 'id_pasar');
     }
 
+    public function pegawai()
+    {
+        return $this->hasMany('App\Models\Pegawai', 'id_pasar');
+    }
+
+    public function pungutan()
+    {
+        return $this->hasMany('App\Models\Pungutan', 'id_pasar');
+    }
+
     protected static function boot() {
         parent::boot();
 

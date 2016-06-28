@@ -9,7 +9,7 @@
 @endpush
 
 @section('page_title')
-    {!! Helper::pageTitle('Pungutan','Manage data pungutan harian') !!}
+    {!! Helper::pageTitle('Pungutan','Manage data pungutan bulanan') !!}
 
 @endsection
 
@@ -19,7 +19,7 @@
         <i class="fa fa-circle"></i>
     </li>
     <li>
-        <span class="active">Harian</span>
+        <span class="active">Bulanan</span>
     </li>
 @endsection
 
@@ -31,14 +31,14 @@
                 <div class="portlet-title">
                     <div class="caption font-red-sunglo">
                         <i class="icon-share font-red-sunglo"></i>
-                        <span class="caption-subject bold uppercase">Data Pungutan Harian</span>
+                        <span class="caption-subject bold uppercase">Data Pungutan Bulanan</span>
                     </div>
                     <div class="actions">
-                        <a href="{{ url('/petugas/pungutan/harian/create') }}" class="btn btn-circle green-sharp ">
+                        <a href="{{ url('/petugas/pungutan/bulanan/create') }}" class="btn btn-circle green-sharp ">
                             <i class="fa fa-plus"></i>
                             <span class="hidden-xs"> Pungutan </span>
                         </a>
-                        <a href="{{ url('/petugas/tunggakan/harian/create') }}" class="btn btn-circle yellow-casablanca ">
+                        <a href="{{ url('/petugas/tunggakan/bulanan/create') }}" class="btn btn-circle yellow-casablanca ">
                             <i class="fa fa-plus"></i>
                             <span class="hidden-xs"> Tunggakan </span>
                         </a>
@@ -109,7 +109,7 @@
 @endpush
 
 @push('page_script')
-{!! Helper::registerDatatablesScript('datatables_pungutan', url('/petugas/pungutan/harian/datatable'), [
+{!! Helper::registerDatatablesScript('datatables_pungutan', url('/petugas/pungutan/bulanan/datatable'), [
     ['data'=>'tgl_pungutan','name'=>'pungutan.tgl_pungutan'],
     ['data'=>'nama_pasar','name'=>'ps.nama_pasar'],
     ['data'=>'nama_dagang','name'=>'dg.nama_dagang'],
