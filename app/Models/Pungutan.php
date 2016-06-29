@@ -31,6 +31,12 @@ class Pungutan extends Model
         return $type[$index];
     }
 
+    public static function getLabelDetail($index)
+    {
+        $detail = [Pungutan::D_HARIAN=>'Harian', Pungutan::D_BULANAN=>'Bulanan'];
+        return $detail[$index];
+    }
+
     public function harian()
     {
         return $this->hasOne('App\Models\PungutanHarian', 'id_pungutan');

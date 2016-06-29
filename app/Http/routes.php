@@ -50,7 +50,7 @@ Route::group(['middleware' => ['auth', 'rbac:is,petugas'], 'prefix' => 'petugas'
             Route::get('/',['uses'=>'Petugas\PungutanController@indexBulanan']);
             Route::get('/create',['uses'=>'Petugas\PungutanController@createBulanan']);
             Route::post('/create',['uses'=>'Petugas\PungutanController@storeBulanan']);
-            Route::get('/datatable',['uses'=>'Petugas\PungutanController@dataTableBulanan']);
+            Route::get('/datatable',['uses'=>'Petugas\PungutanController@dataTableBulanan', 'middleware' => 'ajax']);
             Route::get('/detail/{id}',['uses'=>'Petugas\PungutanController@showBulanan']);
         });
 
@@ -109,6 +109,13 @@ Route::group(['middleware' => ['auth', 'rbac:is,operator'], 'prefix' => 'operato
         Route::delete('/delete/{id}',['uses'=>'Operator\DagangController@destroy', 'middleware' => 'ajax']);
         Route::get('/edit/{id}',['uses'=>'Operator\DagangController@edit']);
         Route::post('/edit/{id}',['uses'=>'Operator\DagangController@update']);
+    });
+
+    Route::group(['prefix'=>'setoran', 'as'=>'setoran'], function () {
+        Route::get('/',['uses'=>'Operator\SetoranController@index']);
+        Route::post('/',['uses'=>'Operator\SetoranController@index']);
+        Route::get('/getPetugas',['uses'=>'Operator\SetoranController@getPetugas']);
+        Route::get('/setor/{tgl}/{pasar}/{petugas}',['uses'=>'Operator\SetoranController@setor', 'as'=>'.setor']);
     });
 
 });

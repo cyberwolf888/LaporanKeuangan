@@ -24,16 +24,16 @@
                 </button>
                 <ul class="dropdown-menu" role="menu">
                     <li>
-                        <a href="javascript:;">
+                        <a href="{{ url('/operator/dagang/create') }}">
                             <i class="icon-docs"></i> Add New Dagang </a>
                     </li>
                     <li>
-                        <a href="javascript:;">
-                            <i class="icon-tag"></i> Add New Petugas </a>
+                        <a href="{{ url('/operator/komoditas/create') }}">
+                            <i class="icon-tag"></i> Add New Komoditas </a>
                     </li>
                     <li>
-                        <a href="javascript:;">
-                            <i class="icon-share"></i> Add New Iuran </a>
+                        <a href="{{ url('/operator/setoran') }}">
+                            <i class="icon-share"></i> Setoran </a>
                     </li>
                     <li class="divider"> </li>
                     <li>

@@ -146,5 +146,18 @@ class Helper {
         $return = "Rp. ".number_format($money,0,',','.');
         return $return;
     }
+
+    public static function selectData($data)
+    {
+        if(is_array($data)){
+            $return = [];
+            foreach ($data as $key=>$value){
+                array_push($return, ['id' => $key, 'text' => $value]);
+            }
+            return $return;
+        }else{
+            return null;
+        }
+    }
     
 }

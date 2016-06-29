@@ -35,7 +35,7 @@
         </a>
     </li>
     <li class="nav-item  @if (Route::currentRouteName() === 'setoran') active @endif">
-        <a href="javascript:;" class="nav-link">
+        <a href="{{ url('/operator/setoran') }}" class="nav-link">
             <i class="icon-notebook"></i>
             <span class="title">Setoran</span>
         </a>
