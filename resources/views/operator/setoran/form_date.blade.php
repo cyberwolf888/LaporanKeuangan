@@ -39,6 +39,14 @@
                 </div>
                 <div class="portlet-body form">
                     <div class="row">
+                        @if(Session::has('success_message'))
+                            <div class="col-md-12">
+                                <div class="alert alert-success">
+                                    <button class="close" data-close="alert"></button>
+                                    <span> {{ Session::get('success_message') }} </span>
+                                </div>
+                            </div>
+                        @endif
                         <form role="form" id="form_data" action="" method="post">
                             {!! csrf_field() !!}
                         <div class="col-md-12">

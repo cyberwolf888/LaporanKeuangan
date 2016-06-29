@@ -30,10 +30,10 @@
                         <span class="caption-subject bold uppercase">Setoran Petugas {{$petugas->nama_lengkap}} Tanggal {{$tgl}}</span>
                     </div>
                     <div class="actions">
-                        <a href="javascript:;" class="btn btn-circle green-sharp ">
+                        <button class="btn green-sharp btn-circle" data-toggle="confirmation" data-popout="true" data-original-title="Apakah anda yakin melakukan setoran pada pungutan ini?" id="btn-setor">
                             <i class="fa fa-plus"></i>
                             <span class="hidden-xs"> Setor Semua </span>
-                        </a>
+                        </button>
                         <div class="btn-group">
                             <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
                                 <i class="fa fa-share"></i>
@@ -97,14 +97,21 @@
             <!-- END Portlet PORTLET-->
         </div>
     </div>
-
+<form method="post" id="frm_setor">
+    {!! csrf_field() !!}
+</form>
 @endsection
 
 @push('plugin_script')
+{!! Helper::registerJs('/global/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js') !!}
 {!! Helper::registerDatatablesJs() !!}
 @endpush
 
 @push('page_script')
+<script type="text/javascript">
+    $("#btn-setor").on("confirmed.bs.confirmation",function(){$('#frm_setor').submit();});
+    $("#btn-setor").on("canceled.bs.confirmation",function(){return false;})
+</script>
 <script type="text/javascript">
     var TableDatatablesButtons = function(){
         a=function(){

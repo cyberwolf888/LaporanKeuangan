@@ -116,6 +116,7 @@ Route::group(['middleware' => ['auth', 'rbac:is,operator'], 'prefix' => 'operato
         Route::post('/',['uses'=>'Operator\SetoranController@index']);
         Route::get('/getPetugas',['uses'=>'Operator\SetoranController@getPetugas']);
         Route::get('/setor/{tgl}/{pasar}/{petugas}',['uses'=>'Operator\SetoranController@setor', 'as'=>'.setor']);
+        Route::post('/setor/{tgl}/{pasar}/{petugas}',['uses'=>'Operator\SetoranController@update']);
     });
 
 });

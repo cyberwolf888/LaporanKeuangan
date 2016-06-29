@@ -13,6 +13,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 class SetoranController extends Controller
 {
@@ -97,10 +98,8 @@ class SetoranController extends Controller
             )
             ->select('pungutan.id','pungutan.type','pungutan.detail','pungutan.created_at','pungutan.deposited','pungutan.deposited_to','h.total AS total_harian', 'b.total AS total_bulanan', 'dg.nama_dagang')
             ->where('pungutan.created_by', $petugas->id_users)
-            //->where('pungutan.tgl_pungutan', $tgl_pungutan)
             ->whereRaw('DATE_FORMAT(pungutan.created_at,\'%Y%c%d\')=DATE_FORMAT(\''.$tgl_pungutan.'\',\'%Y%c%d\') AND pungutan.deposited IS NULL')
             ->get();
-        dd($pungutan);
         return view('operator.setoran.setor',[
             'pasar'=>$pasar,
             'petugas'=>$petugas,
@@ -150,9 +149,17 @@ class SetoranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $tgl, $pasar, $petugas)
     {
-        //
+        $tgl_pungutan = date('Y-m-d',strtotime($tgl));
+        $operator = Auth::user()->id;
+        $pungutan = Pungutan::where('created_by', $petugas)
+            ->where('id_pasar',$pasar)
+            ->whereRaw('DATE_FORMAT(created_at,\'%Y%c%d\')=DATE_FORMAT(\''.$tgl_pungutan.'\',\'%Y%c%d\') AND deposited IS NULL')
+            ->update(['deposited' => date("Y-m-d H:i:s", time()), 'deposited_to'=>$operator]);
+        //dd($pungutan);
+        Session::flash('success_message', 'Pungutan berhaisl disetor!');
+        return redirect(url('/operator/setoran'));
     }
 
     /**

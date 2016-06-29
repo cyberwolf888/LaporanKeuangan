@@ -76,7 +76,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group form-md-line-input">
-                                    {!! Form::text('deposited_to', $model->deposited_to == '' ? '-' : $model->deposited_to,['class' => 'form-control', 'id'=>'deposited_to', 'disabled']) !!}
+                                    {!! Form::text('deposited_to', $model->deposited_to == '' ? '-' : \App\User::find($model->deposited_to)->pegawai->nama_lengkap,['class' => 'form-control', 'id'=>'deposited_to', 'disabled']) !!}
                                     {!! Form::Label('deposited_to', 'Disetor Ke') !!}
                                 </div>
                             </div>

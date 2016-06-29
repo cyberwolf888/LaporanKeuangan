@@ -78,7 +78,7 @@ class PungutanController extends Controller
         $id_pasar = Auth::user()->pegawai->id_pasar;
         $pungutan = new Pungutan();
         $dagang = Dagang::leftJoin(DB::raw('(SELECT * FROM pungutan WHERE DATE_FORMAT(tgl_pungutan,\'%Y%c%d\')=DATE_FORMAT(now(),\'%Y%c%d\') AND detail=\''.$pungutan::D_HARIAN.'\') AS p'), 'dagang.id', '=', 'p.id_dagang')
-            ->whereRaw('dagang.id_pasar = "'.$id_pasar.'" AND p.id_dagang IS NULL')
+            ->whereRaw('dagang.id_pasar = "'.$id_pasar.'" AND dagang.status = "'.Dagang::STS_APROVED.'" AND p.id_dagang IS NULL')
             ->pluck('dagang.nama_dagang','dagang.id');
         $tarif = new Tarif();
 
@@ -238,7 +238,7 @@ class PungutanController extends Controller
         $id_pasar = Auth::user()->pegawai->id_pasar;
         $pungutan = new Pungutan();
         $dagang = Dagang::leftJoin(DB::raw('(SELECT * FROM pungutan WHERE DATE_FORMAT(tgl_pungutan,\'%Y%c\')=DATE_FORMAT(now(),\'%Y%c\') AND detail=\''.$pungutan::D_BULANAN.'\') AS p'), 'dagang.id', '=', 'p.id_dagang')
-            ->whereRaw('dagang.id_pasar = "'.$id_pasar.'" AND p.id_dagang IS NULL')
+            ->whereRaw('dagang.id_pasar = "'.$id_pasar.'" AND dagang.status = "'.Dagang::STS_APROVED.'" AND p.id_dagang IS NULL')
             ->pluck('dagang.nama_dagang','dagang.id');
         $tarif = new Tarif();
 
@@ -344,7 +344,7 @@ class PungutanController extends Controller
         if($date){
             $carbon = Carbon::createFromFormat('d-m-Y', $date);
             $dagang = Dagang::leftJoin(DB::raw('(SELECT * FROM pungutan WHERE tgl_pungutan = \''.$carbon->format('Y-m-d').'\' AND pungutan.detail=\''.Pungutan::D_HARIAN.'\') AS pungutan'), 'dagang.id', '=', 'pungutan.id_dagang')
-                ->whereRaw('dagang.id_pasar = "'.$id_pasar.'" AND pungutan.tgl_pungutan IS NULL')
+                ->whereRaw('dagang.id_pasar = "'.$id_pasar.'" AND dagang.status = "'.Dagang::STS_APROVED.'" AND pungutan.tgl_pungutan IS NULL')
                 ->pluck('dagang.nama_dagang','dagang.id');
             if($dagang->count()==0){
                 Session::flash('error_message', 'Tidak ada dagang yang menunggak pada tanggal '.$carbon->format('d F Y'));
@@ -404,7 +404,7 @@ class PungutanController extends Controller
         if($date){
             $carbon = Carbon::createFromFormat('m-Y', $date);
             $dagang = Dagang::leftJoin(DB::raw('(SELECT * FROM pungutan WHERE DATE_FORMAT(tgl_pungutan,\'%Y%c\')=DATE_FORMAT(\''.$carbon->format('Y-m-d').'\',\'%Y%c\') AND pungutan.detail=\''.Pungutan::D_BULANAN.'\') AS pungutan'), 'dagang.id', '=', 'pungutan.id_dagang')
-                ->whereRaw('dagang.id_pasar = "'.$id_pasar.'" AND pungutan.tgl_pungutan IS NULL')
+                ->whereRaw('dagang.id_pasar = "'.$id_pasar.'" AND dagang.status = "'.Dagang::STS_APROVED.'" AND pungutan.tgl_pungutan IS NULL')
                 ->pluck('dagang.nama_dagang','dagang.id');
             if($dagang->count()==0){
                 Session::flash('error_message', 'Tidak ada dagang yang menunggak pada tanggal '.$carbon->format('F Y'));
