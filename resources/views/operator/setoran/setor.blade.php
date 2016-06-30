@@ -21,13 +21,63 @@
 
 @section('content')
     <div class="row">
+        @if($total->total_harian != null)
+        <div class="col-md-4">
+            <!-- BEGIN WIDGET THUMB -->
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                <h4 class="widget-thumb-heading">Total Pungutan Harian</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-green icon-layers"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">IDR</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="{{$total->total_harian}}">{{ number_format($total->total_harian,0,',','.') }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- END WIDGET THUMB -->
+        </div>
+        @endif
+
+        @if($total->total_bulanan != null)
+        <div class="col-md-4">
+            <!-- BEGIN WIDGET THUMB -->
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                <h4 class="widget-thumb-heading">Total Pungutan Bulanan</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-blue icon-layers"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">IDR</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="{{$total->total_bulanan}}">{{ number_format($total->total_bulanan,0,',','.') }}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- END WIDGET THUMB -->
+        </div>
+        @endif
+
+        <div class="col-md-4">
+            <!-- BEGIN WIDGET THUMB -->
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 bordered">
+                <h4 class="widget-thumb-heading">Total Setor</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-red icon-layers"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">IDR</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="{!! $total->total_harian+$total->total_bulanan !!}">{!! number_format($total->total_harian+$total->total_bulanan,0,',','.') !!}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- END WIDGET THUMB -->
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12">
             <!-- BEGIN Portlet PORTLET-->
             <div class="portlet light">
                 <div class="portlet-title">
                     <div class="caption font-red-sunglo">
                         <i class="icon-share font-red-sunglo"></i>
-                        <span class="caption-subject bold uppercase">Setoran Petugas {{$petugas->nama_lengkap}} Tanggal {{$tgl}}</span>
+                        <span class="caption-subject bold uppercase">Rincian Setoran Petugas {{$petugas->nama_lengkap}} Tanggal {{$tgl}}</span>
                     </div>
                     <div class="actions">
                         <button class="btn green-sharp btn-circle" data-toggle="confirmation" data-popout="true" data-original-title="Apakah anda yakin melakukan setoran pada pungutan ini?" id="btn-setor">

@@ -34,7 +34,7 @@
             <span class="title">Dagang</span>
         </a>
     </li>
-    <li class="nav-item  @if (Route::currentRouteName() === 'setoran') active @endif">
+    <li class="nav-item  @if (str_is('setoran*', Route::currentRouteName())) active @endif">
         <a href="{{ url('/operator/setoran') }}" class="nav-link">
             <i class="icon-notebook"></i>
             <span class="title">Setoran</span>
@@ -51,12 +51,12 @@
         </a>
         <ul class="sub-menu">
             <li class="nav-item  ">
-                <a href="layout_blank_page.html" class="nav-link ">
+                <a href="{{ url('/operator/laporan/keuangan') }}" class="nav-link ">
                     <span class="title">Keuangan</span>
                 </a>
             </li>
             <li class="nav-item  ">
-                <a href="layout_language_bar.html" class="nav-link ">
+                <a href="{{ url('/operator/laporan/dagang') }}" class="nav-link ">
                     <span class="title">Dagang</span>
                 </a>
             </li>

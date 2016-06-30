@@ -119,6 +119,12 @@ Route::group(['middleware' => ['auth', 'rbac:is,operator'], 'prefix' => 'operato
         Route::post('/setor/{tgl}/{pasar}/{petugas}',['uses'=>'Operator\SetoranController@update']);
     });
 
+    Route::group(['prefix'=>'laporan', 'as'=>'laporan'], function () {
+        Route::get('/keuangan',['uses'=>'Operator\LaporanController@indexKeuangan']);
+        Route::post('/keuangan',['uses'=>'Operator\LaporanController@indexKeuangan']);
+        Route::get('/keuangan/result/{start_date}/{end_date}/{pasar}/{sts_pungutan}',['uses'=>'Operator\LaporanController@result', 'as'=>'.result']);
+    });
+
 });
 
 /*
