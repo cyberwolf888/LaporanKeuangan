@@ -43,7 +43,7 @@
     <li class="heading">
         <h3 class="uppercase">Features</h3>
     </li>
-    <li class="nav-item  ">
+    <li class="nav-item @if (str_is('laporan*', Route::currentRouteName())) active @endif">
         <a href="javascript:;" class="nav-link nav-toggle">
             <i class="icon-layers"></i>
             <span class="title">Reports</span>

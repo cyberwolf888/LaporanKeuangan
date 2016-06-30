@@ -122,7 +122,11 @@ Route::group(['middleware' => ['auth', 'rbac:is,operator'], 'prefix' => 'operato
     Route::group(['prefix'=>'laporan', 'as'=>'laporan'], function () {
         Route::get('/keuangan',['uses'=>'Operator\LaporanController@indexKeuangan']);
         Route::post('/keuangan',['uses'=>'Operator\LaporanController@indexKeuangan']);
-        Route::get('/keuangan/result/{start_date}/{end_date}/{pasar}/{sts_pungutan}',['uses'=>'Operator\LaporanController@result', 'as'=>'.result']);
+        Route::get('/keuangan/result/{start_date}/{end_date}/{pasar}/{sts_pungutan}',['uses'=>'Operator\LaporanController@resultKeuangan', 'as'=>'.resultKeuangan']);
+
+        Route::get('/dagang',['uses'=>'Operator\LaporanController@indexDagang']);
+        Route::post('/dagang',['uses'=>'Operator\LaporanController@indexDagang']);
+        Route::get('/dagang/result/{start_date}/{end_date}/{pasar}/{komoditas}/{sts_dagang}',['uses'=>'Operator\LaporanController@resultDagang', 'as'=>'.resultDagang']);
     });
 
 });

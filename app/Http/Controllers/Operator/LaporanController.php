@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Operator;
 
+use App\Models\Komoditas;
 use App\Models\Pasar;
 use Illuminate\Http\Request;
 
@@ -11,15 +12,11 @@ use Illuminate\Support\Facades\DB;
 
 class LaporanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function indexKeuangan(Request $request)
     {
         if(count($request->all())>0){
-            return redirect()->route('laporan.result',[
+            return redirect()->route('laporan.resultKeuangan',[
                 'start_date'=>$request->start_date,
                 'end_date'=>$request->end_date,
                 'pasar'=>$request->id_pasar,
@@ -30,7 +27,7 @@ class LaporanController extends Controller
         return view('operator.laporan.keuangan.form_date',['pasar'=>$pasar]);
     }
 
-    public function result($start_date, $end_date, $pasar, $sts_pungutan)
+    public function resultKeuangan($start_date, $end_date, $pasar, $sts_pungutan)
     {
         $tgl_start = date('Y-m-d',strtotime($start_date));
         $tgl_end = date('Y-m-d',strtotime($end_date));
@@ -47,7 +44,14 @@ class LaporanController extends Controller
                     $join->on('p.id', '=', 'b.id_pungutan');
                 }
             )
-            ->select(DB::raw('p.id_pasar, p.id_dagang, p.tgl_pungutan, p.created_by, sum(h.total) AS total_harian, sum(b.total) AS total_bulanan'));
+            ->select(DB::raw('p.id_pasar, p.id_dagang, p.tgl_pungutan, p.created_by, sum(h.total) AS total_harian,
+                              sum(h.tempat_berjualan) AS total_tempat_berjualan,
+                              sum(h.listrik) AS total_listrik,
+                              sum(h.air) AS total_air,
+                              sum(h.ppn) AS total_ppn_harian,
+                              sum(b.total) AS total_bulanan,
+                              sum(b.sewa_tempat) AS total_sewa_tempat_bulanan,
+                              sum(b.ppn) AS total_ppn_bulanan'));
         $q_detail = DB::table('pungutan AS p')
             ->leftJoin(
                 'pungutan_harian AS h',
@@ -85,9 +89,15 @@ class LaporanController extends Controller
                     $join->on('p.deposited_to', '=', 'op.id_users');
                 }
             )
-            ->select(DB::raw('p.id, p.id_pasar, p.id_dagang, p.type, p.deposited, p.detail, p.created_at,
+            ->select(DB::raw('p.id, p.tgl_pungutan, p.id_pasar, p.id_dagang, p.type, p.deposited, p.detail, p.created_at,
                               h.total AS total_harian,
+                              h.tempat_berjualan,
+                              h.listrik,
+                              h.air,
+                              h.ppn AS ppn_harian,
                               b.total AS total_bulanan,
+                              b.sewa_tempat,
+                              b.ppn as ppn_bulanan,
                               ps.nama_pasar,
                               dg.nama_dagang,
                               pg.id AS id_petugas,
@@ -108,66 +118,71 @@ class LaporanController extends Controller
 
         $q_total->whereRaw('DATE_FORMAT(p.created_at,\'%Y%c%d\') BETWEEN DATE_FORMAT(\''.$tgl_start.'\',\'%Y%c%d\') AND DATE_FORMAT(\''.$tgl_end.'\',\'%Y%c%d\')');
         $q_detail->whereRaw('DATE_FORMAT(p.created_at,\'%Y%c%d\') BETWEEN DATE_FORMAT(\''.$tgl_start.'\',\'%Y%c%d\') AND DATE_FORMAT(\''.$tgl_end.'\',\'%Y%c%d\')');
+        $q_detail->orderBy('p.created_at', 'desc');
 
         $total = $q_total->first();
         $detail = $q_detail->get();
 
-        return $pasar;
+        return view('operator.laporan.keuangan.result',[
+            'total'=>$total,
+            'detail'=>$detail,
+            'start_date'=>$start_date,
+            'end_date'=>$end_date
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function indexDagang(Request $request)
     {
-        //
+        if(count($request->all())>0){
+            return redirect()->route('laporan.resultDagang',[
+                'start_date'=>$request->start_date,
+                'end_date'=>$request->end_date,
+                'pasar'=>$request->id_pasar,
+                'komoditas'=>$request->id_komoditas,
+                'sts_dagang'=>$request->sts_dagang
+            ]);
+        }
+        $pasar = Pasar::pluck('nama_pasar', 'id')->all();
+        $komoditas = Komoditas::pluck('nama_komoditas', 'id')->all();
+        return view('operator.laporan.dagang.form_date',['pasar'=>$pasar, 'komoditas'=>$komoditas]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function resultDagang($start_date, $end_date, $pasar, $komoditas, $sts_dagang)
     {
-        //
-    }
+        $tgl_start = date('Y-m-d',strtotime($start_date));
+        $tgl_end = date('Y-m-d',strtotime($end_date));
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        $q_detail = DB::table('dagang AS d')
+            ->join(
+                'komoditas AS k',
+                function($join){
+                    $join->on('d.id_komoditas', '=', 'k.id');
+                }
+            )
+            ->join(
+                'pasar AS p',
+                function($join){
+                    $join->on('d.id_pasar', '=', 'p.id');
+                }
+            )->select(DB::raw('d.id,d.id_pasar,d.id_komoditas,d.nama_dagang,d.jenis_dagang,d.status,d.created_at,
+                              k.nama_komoditas,
+                              p.nama_pasar'));
+        if($pasar != '0'){
+            $q_detail->where('d.id_pasar',$pasar);
+        }
+        if($komoditas != '0'){
+            $q_detail->where('d.id_komoditas',$komoditas);
+        }
+        if($sts_dagang != '0'){
+            $q_detail->where('d.status',$sts_dagang);
+        }
+        $q_detail->whereRaw('DATE_FORMAT(d.created_at,\'%Y%c%d\') BETWEEN DATE_FORMAT(\''.$tgl_start.'\',\'%Y%c%d\') AND DATE_FORMAT(\''.$tgl_end.'\',\'%Y%c%d\')');
+        $q_detail->orderBy('d.created_at', 'desc');
+        $detail = $q_detail->get();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return view('operator.laporan.dagang.result',[
+            'detail'=>$detail,
+            'start_date'=>$start_date,
+            'end_date'=>$end_date
+        ]);
     }
 }
