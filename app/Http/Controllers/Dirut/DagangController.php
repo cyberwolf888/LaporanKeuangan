@@ -55,8 +55,15 @@ class DagangController extends Controller
             ->editColumn('created_at', function($data){ return date('d F Y', strtotime($data->created_at)); })
             //->editColumn('updated_at', function($data){ return date('d F Y', strtotime($data->updated_at)); })
             ->addColumn('action', function ($data) {
-                return '<a href="'.url('/dirut/dagang/edit')."/".$data->id.'" class="btn btn-icon-only blue" title="Edit"><i class="fa fa-pencil"></i></a>'
+                $return =  '<a href="'.url('/dirut/dagang/edit')."/".$data->id.'" class="btn btn-icon-only blue" title="Edit"><i class="fa fa-pencil"></i></a>'
                 .'<a href="javascript:del(\''.$data->id.'\');" class="btn btn-icon-only red btn-del" title="Edit"><i class="fa fa-trash"></i></a>';
+                if($data->status == 'AP'){
+                    $return.=  '<a href="javascript:pending(\''.$data->id.'\');" class="btn btn-icon-only yellow-crusta" title="Edit"><i class="fa fa-ban"></i></a>';
+                }elseif ($data->status == 'PD'){
+                    $return.=  '<a href="javascript:approved(\''.$data->id.'\');" class="btn btn-icon-only green" title="Edit"><i class="fa fa-check"></i></a>';
+                }
+
+                return $return;
             })
             ->make(true);
     }
@@ -164,5 +171,18 @@ class DagangController extends Controller
     public function destroy($id)
     {
         Dagang::findOrFail($id)->delete();
+    }
+
+    public function approved($id)
+    {
+        $model = Dagang::findOrFail($id);
+        $model->status = Dagang::STS_APROVED;
+        $model->save();
+    }
+    public function pending($id)
+    {
+        $model = Dagang::findOrFail($id);
+        $model->status = Dagang::STS_PENDING;
+        $model->save();
     }
 }

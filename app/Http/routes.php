@@ -149,6 +149,8 @@ Route::group(['middleware' => ['auth', 'rbac:is,dirut'], 'prefix' => 'dirut'], f
         Route::delete('/delete/{id}',['uses'=>'Dirut\DagangController@destroy', 'middleware' => 'ajax']);
         Route::get('/edit/{id}',['uses'=>'Dirut\DagangController@edit']);
         Route::post('/edit/{id}',['uses'=>'Dirut\DagangController@update']);
+        Route::post('/approved/{id}',['uses'=>'Dirut\DagangController@approved']);
+        Route::post('/pending/{id}',['uses'=>'Dirut\DagangController@pending']);
     });
 
     Route::group(['prefix'=>'laporan', 'as'=>'laporan'], function () {
@@ -159,6 +161,12 @@ Route::group(['middleware' => ['auth', 'rbac:is,dirut'], 'prefix' => 'dirut'], f
         Route::get('/dagang',['uses'=>'Dirut\LaporanController@indexDagang']);
         Route::post('/dagang',['uses'=>'Dirut\LaporanController@indexDagang']);
         Route::get('/dagang/result/{start_date}/{end_date}/{pasar}/{komoditas}/{sts_dagang}',['uses'=>'Dirut\LaporanController@resultDagang', 'as'=>'.resultDagangDirut']);
+    });
+
+    Route::group(['prefix'=>'tarif', 'as'=>'tarif'], function () {
+        Route::get('/',['uses'=>'Dirut\TarifController@index']);
+        Route::get('/edit/{id}',['uses'=>'Dirut\TarifController@edit']);
+        Route::post('/edit/{id}',['uses'=>'Dirut\TarifController@update']);
     });
 
 });

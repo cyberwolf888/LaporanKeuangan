@@ -115,5 +115,51 @@
 
 {!! Helper::delScript(url('/dirut/dagang/delete')) !!}
 
+<script>
+    var approved = function(id){
+        if (confirm("Are you sure want to approve this data?")) {
+            var url = "{{ url('/dirut/dagang/approved') }}/"+id;
+            $.ajaxSetup(
+                    {
+                        headers:
+                        {
+                            "X-CSRF-Token": $("meta[name='csrf-token']").attr("content")
+                        }
+                    });
+            $.ajax({
+                method: "POST",
+                url: url,
+                data: { id: id }
+            }).success(function( data ) {
+                $('#datatables_dagang').dataTable()._fnAjaxUpdate();
+            });
 
+        } else {
+            return false;
+        }
+    };
+
+    var pending = function(id){
+        if (confirm("Are you sure want to pending this data?")) {
+            var url = "{{ url('/dirut/dagang/pending') }}/"+id;
+            $.ajaxSetup(
+                    {
+                        headers:
+                        {
+                            "X-CSRF-Token": $("meta[name='csrf-token']").attr("content")
+                        }
+                    });
+            $.ajax({
+                method: "POST",
+                url: url,
+                data: { id: id }
+            }).success(function( data ) {
+                $('#datatables_dagang').dataTable()._fnAjaxUpdate();
+            });
+
+        } else {
+            return false;
+        }
+    };
+</script>
 @endpush
