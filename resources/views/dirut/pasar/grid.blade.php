@@ -1,4 +1,4 @@
-@extends('layouts.operator.layout1')
+@extends('layouts.dirut.layout1')
 
 @section('title')
     Pasar
@@ -30,7 +30,7 @@
                         <span class="caption-subject bold uppercase">Data Pasar</span>
                     </div>
                     <div class="actions">
-                        <a href="{{ url('/operator/pasar/create') }}" class="btn btn-circle green-sharp ">
+                        <a href="{{ url('/dirut/pasar/create') }}" class="btn btn-circle green-sharp ">
                             <i class="fa fa-plus"></i>
                             <span class="hidden-xs"> Add New Data </span>
                         </a>
@@ -100,7 +100,7 @@
 @endpush
 
 @push('page_script')
-    {!! Helper::registerDatatablesScript('datatables_pasar', url('/operator/pasar/datatable'), [
+    {!! Helper::registerDatatablesScript('datatables_pasar', url('/dirut/pasar/datatable'), [
         ['data'=>'id','name'=>'pasar.id'],
         ['data'=>'nama_pasar','name'=>'pasar.nama_pasar'],
         ['data'=>'nama_lengkap','name'=>'pegawai.nama_lengkap'],
@@ -109,7 +109,7 @@
         ['data'=>'action','name'=>'action', 'orderable'=>false, 'searchable'=> false]
     ]) !!}
 
-    {!! Helper::delScript(url('/operator/pasar/delete')) !!}
+    {!! Helper::delScript(url('/dirut/pasar/delete')) !!}
 
 
 @endpush

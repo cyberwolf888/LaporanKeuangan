@@ -6,7 +6,7 @@
 <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
 <ul class="page-sidebar-menu   " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
     <li class="nav-item @if (Route::currentRouteName() === 'dashboard') active open @endif start">
-        <a href="{{ url('/operator') }}" class="nav-link">
+        <a href="{{ url('/dirut') }}" class="nav-link">
             <i class="icon-home"></i>
             <span class="title">Dashboard</span>
             <span class="selected"></span>
@@ -16,22 +16,41 @@
     <li class="heading">
         <h3 class="uppercase">Manage Data</h3>
     </li>
-    <li class="nav-item @if (Route::currentRouteName() === 'komoditas') active @endif">
-        <a href="{{ url('/operator/komoditas') }}" class="nav-link">
-            <i class="icon-social-dropbox"></i>
-            <span class="title">Komoditas</span>
+    <li class="nav-item @if (Route::currentRouteName() === 'pasar') active @endif">
+        <a href="{{ url('/dirut/pasar') }}" class="nav-link">
+            <i class="icon-diamond"></i>
+            <span class="title">Pasar</span>
         </a>
     </li>
     <li class="nav-item  @if (Route::currentRouteName() === 'dagang') active @endif">
-        <a href="{{ url('/operator/dagang') }}" class="nav-link">
+        <a href="{{ url('/dirut/dagang') }}" class="nav-link">
             <i class="icon-puzzle"></i>
             <span class="title">Dagang</span>
         </a>
     </li>
-    <li class="nav-item  @if (str_is('setoran*', Route::currentRouteName())) active @endif">
-        <a href="{{ url('/operator/setoran') }}" class="nav-link">
+    <li class="nav-item @if (str_is('pegawai*', Route::currentRouteName())) active @endif">
+        <a href="javascript:;" class="nav-link nav-toggle">
             <i class="icon-notebook"></i>
-            <span class="title">Setoran</span>
+            <span class="title">Pegawai</span>
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub-menu">
+            <li class="nav-item  ">
+                <a href="{{ url('/dirut/pegawai/operator') }}" class="nav-link ">
+                    <span class="title">Operator</span>
+                </a>
+            </li>
+            <li class="nav-item  ">
+                <a href="{{ url('/dirut/pegawai/petugas') }}" class="nav-link ">
+                    <span class="title">Petugas</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-item  @if (Route::currentRouteName() === 'tarif') active @endif">
+        <a href="{{ url('/dirut/tarif') }}" class="nav-link">
+            <i class="icon-basket"></i>
+            <span class="title">Tarif</span>
         </a>
     </li>
     <li class="heading">
@@ -45,12 +64,12 @@
         </a>
         <ul class="sub-menu">
             <li class="nav-item  ">
-                <a href="{{ url('/operator/laporan/keuangan') }}" class="nav-link ">
+                <a href="{{ url('/dirut/laporan/keuangan') }}" class="nav-link ">
                     <span class="title">Keuangan</span>
                 </a>
             </li>
             <li class="nav-item  ">
-                <a href="{{ url('/operator/laporan/dagang') }}" class="nav-link ">
+                <a href="{{ url('/dirut/laporan/dagang') }}" class="nav-link ">
                     <span class="title">Dagang</span>
                 </a>
             </li>

@@ -29,7 +29,7 @@
     </div>
     <div class="form-actions noborder">
         <button type="submit" class="btn blue">Submit</button>
-        <a href="{{ url('/operator/pasar') }}" class="btn default">Cancel</a>
+        <a href="{{ url('/dirut/pasar') }}" class="btn default">Cancel</a>
     </div>
 </form>
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Operator;
+namespace App\Http\Controllers\Dirut;
 
 use Illuminate\Http\Request;
 
@@ -20,7 +20,7 @@ class PasarController extends Controller
      */
     public function index()
     {
-        return view('operator.pasar.grid');
+        return view('dirut.pasar.grid');
     }
     public function dataTable()
     {
@@ -34,7 +34,7 @@ class PasarController extends Controller
             ->editColumn('created_at', function($data){ return date('d F Y', strtotime($data->created_at)); })
             ->editColumn('updated_at', function($data){ return date('d F Y', strtotime($data->updated_at)); })
             ->addColumn('action', function ($data) {
-                return '<a href="'.url('/operator/pasar/edit')."/".$data->id.'" class="btn btn-icon-only blue" title="Edit"><i class="fa fa-pencil"></i></a>'
+                return '<a href="'.url('/dirut/pasar/edit')."/".$data->id.'" class="btn btn-icon-only blue" title="Edit"><i class="fa fa-pencil"></i></a>'
                     .'<a href="javascript:del(\''.$data->id.'\');" class="btn btn-icon-only red btn-del" title="Edit"><i class="fa fa-trash"></i></a>';
             })
             ->make(true);
@@ -48,7 +48,7 @@ class PasarController extends Controller
     public function create()
     {
         $model = new Pasar();
-        return view('operator.pasar.create', ['model'=>$model]);
+        return view('dirut.pasar.create', ['model'=>$model]);
     }
 
     /**
@@ -95,7 +95,7 @@ class PasarController extends Controller
     public function edit($id)
     {
         $model = Pasar::findOrFail($id);
-        return view('operator.pasar.update',['model'=>$model]);
+        return view('dirut.pasar.update',['model'=>$model]);
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('layouts.operator.layout1')
+@extends('layouts.dirut.layout1')
 
 @section('title')
     Pasar
@@ -16,7 +16,7 @@
 
 @section('breadcrumb')
     <li>
-        <a href="{{ url('/operator/pasar') }}">Pasar</a>
+        <a href="{{ url('/dirut/pasar') }}">Pasar</a>
         <i class="fa fa-circle"></i>
     </li>
     <li>
@@ -41,7 +41,7 @@
                 <div class="portlet-body form">
                     <div class="row">
                         <div class="col-md-6">
-                            @include('operator.pasar.form')
+                            @include('dirut.pasar.form')
                         </div>
                     </div>
                 </div>
