@@ -36,6 +36,11 @@
         </a>
         <ul class="sub-menu">
             <li class="nav-item  ">
+                <a href="{{ url('/dirut/pegawai/dirut') }}" class="nav-link ">
+                    <span class="title">Dirut</span>
+                </a>
+            </li>
+            <li class="nav-item  ">
                 <a href="{{ url('/dirut/pegawai/operator') }}" class="nav-link ">
                     <span class="title">Operator</span>
                 </a>

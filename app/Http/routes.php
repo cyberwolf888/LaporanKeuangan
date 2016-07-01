@@ -169,6 +169,12 @@ Route::group(['middleware' => ['auth', 'rbac:is,dirut'], 'prefix' => 'dirut'], f
         Route::post('/edit/{id}',['uses'=>'Dirut\TarifController@update']);
     });
 
+    Route::group(['prefix'=>'pegawai', 'as'=>'pegawai'], function () {
+        Route::get('/dirut',['uses'=>'Dirut\PegawaiController@dirut']);
+        Route::get('/dirut/edit/{id}',['uses'=>'Dirut\PegawaiController@editDirut']);
+        Route::post('/dirut/edit/{id}',['uses'=>'Dirut\PegawaiController@updateDirut']);
+    });
+
 });
 /*
  * End Routes

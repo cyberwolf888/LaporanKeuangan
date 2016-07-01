@@ -1,7 +1,7 @@
 @extends('layouts.dirut.layout1')
 
 @section('title')
-    Tarif
+    Dirut
 @endsection
 
 @push('plugin_css')
@@ -9,13 +9,13 @@
 @endpush
 
 @section('page_title')
-    {!! Helper::pageTitle('Tarif','Manage data tarif') !!}
+    {!! Helper::pageTitle('Dirut','Manage data dirut') !!}
 
 @endsection
 
 @section('breadcrumb')
     <li>
-        <span class="active">Tarif</span>
+        <span class="active">Dirut</span>
     </li>
 @endsection
 
@@ -27,7 +27,7 @@
                 <div class="portlet-title">
                     <div class="caption font-red-sunglo">
                         <i class="icon-share font-red-sunglo"></i>
-                        <span class="caption-subject bold uppercase">Data Tarif</span>
+                        <span class="caption-subject bold uppercase">Data Dirut</span>
                     </div>
                     <div class="actions">
                         <div class="btn-group">
@@ -64,26 +64,28 @@
                         <table class="table table-striped table-bordered table-hover" id="datatables_dagang">
                             <thead>
                             <tr>
-                                <th> No </th>
-                                <th> Tarif </th>
-                                <th> Harga </th>
-                                <th> Type </th>
-                                <th> Jenis Dagang </th>
-                                <th>  </th>
+                                <th> ID Pegawai </th>
+                                <th> Email </th>
+                                <th> Nama Lengkap </th>
+                                <th> Jenis Kelamin </th>
+                                <th> No Telp </th>
+                                <th> Alamat </th>
+                                <th> Status </th>
+                                <th> </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php $i=1; ?>
-                            @foreach($tarif as $data)
+                            @foreach($model as $data)
                                 <tr>
-                                    <td> {{ $i }} </td>
-                                    <td> {{ $data->label }} </td>
-                                    <td> {{ Helper::formatMoney($data->tarif) }} </td>
-                                    <td> {{ \App\Models\Pungutan::getLabelDetail($data->type) }}</td>
-                                    <td> {{ \App\Models\Dagang::getLabelJenis($data->jenis_dagang) }}</td>
-                                    <td> <a href="{{ url('/dirut/tarif/edit').'/'.$data->id }}" class="btn btn-icon-only blue" title="Edit"><i class="fa fa-pencil"></i></a> </td>
+                                    <td> {{ $data->pegawai->getKey() }} </td>
+                                    <td> {{ $data->email }} </td>
+                                    <td> {{ $data->pegawai->nama_lengkap }} </td>
+                                    <td> {{ $data->pegawai->getLabelJenisKelamin($data->pegawai->jenis_kelamin) }} </td>
+                                    <td> {{ $data->pegawai->no_telp }} </td>
+                                    <td> {{ $data->pegawai->alamat }} </td>
+                                    <td> {{ $data->getLabelStatus($data->status) }} </td>
+                                    <td> <a href="{{ url('/dirut/pegawai/dirut/edit').'/'.$data->id }}" class="btn btn-icon-only blue" title="Edit"><i class="fa fa-pencil"></i></a> </td>
                                 </tr>
-                                <?php $i++; ?>
                             @endforeach
                             </tbody>
                         </table>
