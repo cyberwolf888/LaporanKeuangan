@@ -171,8 +171,22 @@ Route::group(['middleware' => ['auth', 'rbac:is,dirut'], 'prefix' => 'dirut'], f
 
     Route::group(['prefix'=>'pegawai', 'as'=>'pegawai'], function () {
         Route::get('/dirut',['uses'=>'Dirut\PegawaiController@dirut']);
+        Route::get('/dirut/create',['uses'=>'Dirut\PegawaiController@createDirut']);
+        Route::post('/dirut/create',['uses'=>'Dirut\PegawaiController@storeDirut']);
         Route::get('/dirut/edit/{id}',['uses'=>'Dirut\PegawaiController@editDirut']);
         Route::post('/dirut/edit/{id}',['uses'=>'Dirut\PegawaiController@updateDirut']);
+
+        Route::get('/operator',['uses'=>'Dirut\PegawaiController@operator']);
+        Route::get('/operator/create',['uses'=>'Dirut\PegawaiController@createOperator']);
+        Route::post('/operator/create',['uses'=>'Dirut\PegawaiController@storeOperator']);
+        Route::get('/operator/edit/{id}',['uses'=>'Dirut\PegawaiController@editOperator']);
+        Route::post('/operator/edit/{id}',['uses'=>'Dirut\PegawaiController@updateOperator']);
+
+        Route::get('/petugas',['uses'=>'Dirut\PegawaiController@petugas']);
+        Route::get('/petugas/create',['uses'=>'Dirut\PegawaiController@createPetugas']);
+        Route::post('/petugas/create',['uses'=>'Dirut\PegawaiController@storePetugas']);
+        Route::get('/petugas/edit/{id}',['uses'=>'Dirut\PegawaiController@editPetugas']);
+        Route::post('/petugas/edit/{id}',['uses'=>'Dirut\PegawaiController@updatePetugas']);
     });
 
 });

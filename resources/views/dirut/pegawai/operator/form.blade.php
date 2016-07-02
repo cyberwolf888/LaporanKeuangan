@@ -75,7 +75,7 @@
             <div class="col-md-6">
                 <div class="form-actions noborder">
                     <button type="submit" class="btn blue">Submit</button>
-                    <a href="{{ url('/dirut/pegawai/dirut') }}" class="btn default">Cancel</a>
+                    <a href="{{ url('/dirut/pegawai/operator') }}" class="btn default">Cancel</a>
                 </div>
             </div>
         </div>

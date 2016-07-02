@@ -1,7 +1,7 @@
 @extends('layouts.dirut.layout1')
 
 @section('title')
-    Dirut
+    Operator
 @endsection
 
 @push('plugin_css')
@@ -9,13 +9,13 @@
 @endpush
 
 @section('page_title')
-    {!! Helper::pageTitle('Dirut','Manage data dirut') !!}
+    {!! Helper::pageTitle('Operator','Manage data operator') !!}
 
 @endsection
 
 @section('breadcrumb')
     <li>
-        <span class="active">Dirut</span>
+        <span class="active">Operator</span>
     </li>
 @endsection
 
@@ -27,10 +27,10 @@
                 <div class="portlet-title">
                     <div class="caption font-red-sunglo">
                         <i class="icon-share font-red-sunglo"></i>
-                        <span class="caption-subject bold uppercase">Data Dirut</span>
+                        <span class="caption-subject bold uppercase">Data Operator</span>
                     </div>
                     <div class="actions">
-                        <a href="{{ url('/dirut/pegawai/dirut/create') }}" class="btn btn-circle green-sharp ">
+                        <a href="{{ url('/dirut/pegawai/operator/create') }}" class="btn btn-circle green-sharp ">
                             <i class="fa fa-plus"></i>
                             <span class="hidden-xs"> Add New Data </span>
                         </a>
@@ -88,7 +88,7 @@
                                     <td> {{ $data->pegawai->no_telp }} </td>
                                     <td> {{ $data->pegawai->alamat }} </td>
                                     <td> {{ $data->getLabelStatus($data->status) }} </td>
-                                    <td> <a href="{{ url('/dirut/pegawai/dirut/edit').'/'.$data->id }}" class="btn btn-icon-only blue" title="Edit"><i class="fa fa-pencil"></i></a> </td>
+                                    <td> <a href="{{ url('/dirut/pegawai/operator/edit').'/'.$data->id }}" class="btn btn-icon-only blue" title="Edit"><i class="fa fa-pencil"></i></a> </td>
                                 </tr>
                             @endforeach
                             </tbody>

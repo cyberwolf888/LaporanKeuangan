@@ -1,3 +1,8 @@
+@push('plugin_css')
+{!! Helper::registerCss('/global/plugins/select2/css/select2.min.css') !!}
+{!! Helper::registerCss('/global/plugins/select2/css/select2-bootstrap.min.css') !!}
+
+@endpush
 @if($errors->any())
     <div class="col-md-12">
         <div class="alert alert-danger">
@@ -73,9 +78,18 @@
         </div>
         <div class="col-md-12">
             <div class="col-md-6">
+                <div class="form-group form-md-line-input">
+                    {!! Form::label('id_pasar', 'Pasar', ['class'=>'control-label']) !!}
+                    {!! Form::select('id_pasar', $pasar, isset($model->pegawai->id_pasar) ? $model->pegawai->id_pasar : null,['id'=>'id_pasar', 'class'=>'form-control select2']) !!}
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="form-actions noborder">
                     <button type="submit" class="btn blue">Submit</button>
-                    <a href="{{ url('/dirut/pegawai/dirut') }}" class="btn default">Cancel</a>
+                    <a href="{{ url('/dirut/pegawai/petugas') }}" class="btn default">Cancel</a>
                 </div>
             </div>
         </div>
@@ -86,10 +100,16 @@
 </div>
 
 @push('plugin_script')
+{!! Helper::registerJs('/global/plugins/select2/js/select2.full.min.js') !!}
 {!! Helper::registerValidateJs() !!}
 @endpush
 
 @push('page_script')
+<script>
+    $('#id_pasar').select2({
+        theme: "bootstrap",
+    })
+</script>
 <script>
     var FormValidationMd=function()
     {

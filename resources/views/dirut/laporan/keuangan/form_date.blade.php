@@ -79,14 +79,12 @@
                                         <div class="form-group">
                                             {!! Form::label('id_pasar', 'Pasar', ['class'=>'control-label']) !!}
                                             {!! Form::select('id_pasar',[0=>'Semua Pasar']+$pasar,[],['id'=>'id_pasar', 'class'=>'form-control select2']) !!}
-                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             {!! Form::label('sts_pungutan', 'Status Pungutan', ['class'=>'control-label']) !!}
                                             {!! Form::select('sts_pungutan',['Semua','Sudah disetor','Belum disetor'],[],['id'=>'sts_pungutan', 'class'=>'form-control select2']) !!}
-                                            </select>
                                         </div>
                                     </div>
                                 </div>

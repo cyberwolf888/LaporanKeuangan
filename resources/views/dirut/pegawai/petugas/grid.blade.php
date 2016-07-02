@@ -1,7 +1,7 @@
 @extends('layouts.dirut.layout1')
 
 @section('title')
-    Dirut
+    Petugas
 @endsection
 
 @push('plugin_css')
@@ -9,13 +9,13 @@
 @endpush
 
 @section('page_title')
-    {!! Helper::pageTitle('Dirut','Manage data dirut') !!}
+    {!! Helper::pageTitle('Petugas','Manage data Petugas') !!}
 
 @endsection
 
 @section('breadcrumb')
     <li>
-        <span class="active">Dirut</span>
+        <span class="active">Petugas</span>
     </li>
 @endsection
 
@@ -27,10 +27,10 @@
                 <div class="portlet-title">
                     <div class="caption font-red-sunglo">
                         <i class="icon-share font-red-sunglo"></i>
-                        <span class="caption-subject bold uppercase">Data Dirut</span>
+                        <span class="caption-subject bold uppercase">Data Petugas</span>
                     </div>
                     <div class="actions">
-                        <a href="{{ url('/dirut/pegawai/dirut/create') }}" class="btn btn-circle green-sharp ">
+                        <a href="{{ url('/dirut/pegawai/petugas/create') }}" class="btn btn-circle green-sharp ">
                             <i class="fa fa-plus"></i>
                             <span class="hidden-xs"> Add New Data </span>
                         </a>
@@ -69,6 +69,7 @@
                             <thead>
                             <tr>
                                 <th> ID Pegawai </th>
+                                <th> ID Pasar </th>
                                 <th> Email </th>
                                 <th> Nama Lengkap </th>
                                 <th> Jenis Kelamin </th>
@@ -82,13 +83,14 @@
                             @foreach($model as $data)
                                 <tr>
                                     <td> {{ $data->pegawai->getKey() }} </td>
+                                    <td> {{ $data->pegawai->id_pasar }} </td>
                                     <td> {{ $data->email }} </td>
                                     <td> {{ $data->pegawai->nama_lengkap }} </td>
                                     <td> {{ $data->pegawai->getLabelJenisKelamin($data->pegawai->jenis_kelamin) }} </td>
                                     <td> {{ $data->pegawai->no_telp }} </td>
                                     <td> {{ $data->pegawai->alamat }} </td>
                                     <td> {{ $data->getLabelStatus($data->status) }} </td>
-                                    <td> <a href="{{ url('/dirut/pegawai/dirut/edit').'/'.$data->id }}" class="btn btn-icon-only blue" title="Edit"><i class="fa fa-pencil"></i></a> </td>
+                                    <td> <a href="{{ url('/dirut/pegawai/petugas/edit').'/'.$data->id }}" class="btn btn-icon-only blue" title="Edit"><i class="fa fa-pencil"></i></a> </td>
                                 </tr>
                             @endforeach
                             </tbody>
