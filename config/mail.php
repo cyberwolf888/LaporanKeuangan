@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'awesome.advertiser@gmail.com', 'name' => 'Laporan Keuangan Denpasar'],
 
     /*
     |--------------------------------------------------------------------------
