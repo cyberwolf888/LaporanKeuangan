@@ -29,7 +29,7 @@
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                             <span class="username username-hide-on-mobile"> {{Auth::user()->pegawai->nama_lengkap}} </span>
                             <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
-                            <img alt="" class="img-circle" src="{{ isset(Auth::user()->pegawai->photo) ? url('/assets/photo/').Auth::user()->pegawai->photo : url('/assets/global/img/default-user-avatar.png') }}" /> </a>
+                            <img alt="" class="img-circle" src="{{ isset(Auth::user()->pegawai->photo) ? url('/assets/photo/').'/'.Auth::user()->pegawai->photo : url('/assets/global/img/default-user-avatar.png') }}" /> </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
                                 <a href="page_user_profile_1.html">

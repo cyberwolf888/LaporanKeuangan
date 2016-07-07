@@ -84,8 +84,8 @@
     <li class="heading">
         <h3 class="uppercase">Settings</h3>
     </li>
-    <li class="nav-item  @if (Route::currentRouteName() === 'profile') active @endif">
-        <a href="javascript:;" class="nav-link">
+    <li class="nav-item  @if (str_is('profile*', Route::currentRouteName())) active @endif">
+        <a href="{{ url('/dirut/profile') }}" class="nav-link">
             <i class="icon-user"></i>
             <span class="title">Profile</span>
         </a>

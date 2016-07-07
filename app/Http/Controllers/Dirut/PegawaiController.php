@@ -55,7 +55,7 @@ class PegawaiController extends Controller
                 $user->roles()->attach(3);
                 $data = [
                     'to' => $request->email,
-                    'from' => 'awesome.advertiser@gmail.com',
+                    'from' => env('MAIL_USERNAME'),
                     'name' => 'Laporan Keuangan Denpasar',
                     'subject' => 'New Account',
                     'password' => $password,
@@ -140,7 +140,7 @@ class PegawaiController extends Controller
                 $user->roles()->attach(2);
                 $data = [
                     'to' => $request->email,
-                    'from' => 'awesome.advertiser@gmail.com',
+                    'from' => env('MAIL_USERNAME'),
                     'name' => 'Laporan Keuangan Denpasar',
                     'subject' => 'New Account',
                     'password' => $password,
@@ -227,7 +227,7 @@ class PegawaiController extends Controller
                 $user->roles()->attach(1);
                 $data = [
                     'to' => $request->email,
-                    'from' => 'awesome.advertiser@gmail.com',
+                    'from' => env('MAIL_USERNAME'),
                     'name' => 'Laporan Keuangan Denpasar',
                     'subject' => 'New Account',
                     'password' => $password,

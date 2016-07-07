@@ -189,6 +189,13 @@ Route::group(['middleware' => ['auth', 'rbac:is,dirut'], 'prefix' => 'dirut'], f
         Route::post('/petugas/edit/{id}',['uses'=>'Dirut\PegawaiController@updatePetugas']);
     });
 
+    Route::group(['prefix'=>'profile', 'as'=>'profile'], function () {
+        Route::get('/',['uses'=>'Dirut\ProfileController@index']);
+        Route::post('/overview',['uses'=>'Dirut\ProfileController@overview']);
+        Route::post('/avatar',['uses'=>'Dirut\ProfileController@avatar']);
+        Route::post('/password',['uses'=>'Dirut\ProfileController@password']);
+    });
+
 });
 /*
  * End Routes
