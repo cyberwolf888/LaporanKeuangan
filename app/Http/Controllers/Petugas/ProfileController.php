@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Operator;
+namespace App\Http\Controllers\Petugas;
 
 use Illuminate\Http\Request;
 
@@ -16,7 +16,7 @@ class ProfileController extends Controller
     public function index()
     {
         $model = Auth::user();
-        return view('operator.profile.account',['model'=>$model]);
+        return view('petugas.profile.account',['model'=>$model]);
     }
 
     public function overview(Request $request)

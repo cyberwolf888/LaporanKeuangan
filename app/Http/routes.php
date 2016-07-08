@@ -68,6 +68,13 @@ Route::group(['middleware' => ['auth', 'rbac:is,petugas'], 'prefix' => 'petugas'
             Route::post('/create/{date}',['uses'=>'Petugas\PungutanController@storeTunggakanBulanan']);
         });
     });
+
+    Route::group(['prefix'=>'profile', 'as'=>'profile'], function () {
+        Route::get('/',['uses'=>'Petugas\ProfileController@index']);
+        Route::post('/overview',['uses'=>'Petugas\ProfileController@overview']);
+        Route::post('/avatar',['uses'=>'Petugas\ProfileController@avatar']);
+        Route::post('/password',['uses'=>'Petugas\ProfileController@password']);
+    });
 });
 
 /*
@@ -117,6 +124,13 @@ Route::group(['middleware' => ['auth', 'rbac:is,operator'], 'prefix' => 'operato
         Route::get('/dagang',['uses'=>'Operator\LaporanController@indexDagang']);
         Route::post('/dagang',['uses'=>'Operator\LaporanController@indexDagang']);
         Route::get('/dagang/result/{start_date}/{end_date}/{pasar}/{komoditas}/{sts_dagang}',['uses'=>'Operator\LaporanController@resultDagang', 'as'=>'.resultDagang']);
+    });
+
+    Route::group(['prefix'=>'profile', 'as'=>'profile'], function () {
+        Route::get('/',['uses'=>'Operator\ProfileController@index']);
+        Route::post('/overview',['uses'=>'Operator\ProfileController@overview']);
+        Route::post('/avatar',['uses'=>'Operator\ProfileController@avatar']);
+        Route::post('/password',['uses'=>'Operator\ProfileController@password']);
     });
 
 });
