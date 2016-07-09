@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 28 Jun 2016 pada 10.12
+-- Generation Time: 09 Jul 2016 pada 20.21
 -- Versi Server: 10.1.13-MariaDB
 -- PHP Version: 7.0.5
 
@@ -47,8 +47,9 @@ CREATE TABLE `dagang` (
 
 INSERT INTO `dagang` (`id`, `id_pasar`, `id_komoditas`, `nama_dagang`, `jenis_dagang`, `lokasi`, `status`, `created_at`, `updated_at`, `created_by`, `updated_by`, `deleted_at`) VALUES
 ('DG1606000001', 'PS03', 3, 'Dagang Bunga', 'PN', 'deket parkiran', 'AP', '2016-06-21 19:03:41', '2016-06-23 06:22:12', 1, 1, NULL),
-('DG1606000002', 'PS01', 1, 'Kios Petra', 'KS', 'lantai 2', 'PD', '2016-06-21 19:13:09', '2016-06-23 06:14:17', 1, NULL, NULL),
-('DG1606000003', 'PS03', 1, 'Kios Jagung', 'KS', 'lantai 3', 'PD', '2016-06-21 19:13:53', '2016-06-21 19:18:55', 1, 1, NULL);
+('DG1606000002', 'PS01', 1, 'Kios Petra', 'KS', 'lantai 2', 'PD', '2016-06-21 19:13:09', '2016-07-01 08:44:14', 1, NULL, NULL),
+('DG1606000003', 'PS03', 1, 'Kios Jagung', 'KS', 'lantai 3', 'AP', '2016-06-21 19:13:53', '2016-06-21 19:18:55', 1, 1, NULL),
+('DG1606000004', 'PS02', 9, 'Dagang Ransel', 'PN', 'parkiran', 'PD', '2016-06-29 15:03:13', '2016-06-29 15:03:34', 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -59,7 +60,7 @@ INSERT INTO `dagang` (`id`, `id_pasar`, `id_komoditas`, `nama_dagang`, `jenis_da
 CREATE TABLE `komoditas` (
   `id` int(10) NOT NULL,
   `nama_komoditas` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_by` int(10) NOT NULL,
   `updated_by` int(10) DEFAULT NULL,
@@ -122,12 +123,12 @@ CREATE TABLE `pasar` (
 --
 
 INSERT INTO `pasar` (`id`, `nama_pasar`, `created_at`, `updated_at`, `created_by`, `updated_by`, `deleted_at`) VALUES
-('PS01', 'Pasar Badung', '2016-04-29 04:37:26', '2016-06-23 06:14:17', 1, 1, NULL),
+('PS01', 'Pasar Badung', '2016-04-29 04:37:26', '2016-07-01 06:59:55', 1, 3, NULL),
 ('PS02', 'Pasar Kreneng', '2016-04-29 04:37:41', '2016-06-21 18:08:11', 1, NULL, NULL),
 ('PS03', 'Pasar Sanglah', '2016-04-29 04:37:47', '2016-04-30 18:57:32', 1, 1, NULL),
 ('PS04', 'Pasar Sempidi', '2016-05-07 11:10:04', '2016-05-07 11:10:04', 1, NULL, NULL),
 ('PS05', 'Pasar Anyarsari', '2016-06-22 14:27:07', '2016-06-22 14:27:13', 1, NULL, NULL),
-('PS06', 'Pasar Kuning Sari', '2016-06-22 14:27:17', '2016-06-22 14:27:29', 1, 1, NULL);
+('PS06', 'Pasar Kuning Sari', '2016-06-22 14:27:17', '2016-07-01 07:02:21', 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -140,6 +141,13 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data untuk tabel `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('wijaya.imd@gmail.com', '0218cb9ef2a9a8e86cdafd50daec81a1372bc72403676752f626d3794f9b1466', '2016-07-02 17:25:21');
 
 -- --------------------------------------------------------
 
@@ -156,7 +164,7 @@ CREATE TABLE `pegawai` (
   `alamat` varchar(100) NOT NULL,
   `no_telp` varchar(12) NOT NULL,
   `photo` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_by` int(10) NOT NULL,
   `updated_by` int(10) DEFAULT NULL,
@@ -168,8 +176,14 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`id`, `id_users`, `id_pasar`, `nama_lengkap`, `jenis_kelamin`, `alamat`, `no_telp`, `photo`, `created_at`, `updated_at`, `created_by`, `updated_by`, `deleted_at`) VALUES
-('PG1604001', 1, NULL, 'Manik Anggara', 'L', 'Jalan Nangka Utara', '082247464196', NULL, '2016-06-21 17:36:15', NULL, 1, NULL, NULL),
-('PG1604002', 2, 'PS03', 'Petugas Manik', 'L', 'Jalan Ayani Utara', '085474121363', NULL, '2016-06-23 16:20:39', NULL, 1, NULL, NULL);
+('PG1604001', 1, NULL, 'Manik Operator', 'L', 'Jalan Nangka Utara', '082247464196', 'PG1604001pJZmWTnkn3.jpg', '2016-07-02 16:22:22', '2016-07-08 06:02:19', 1, NULL, NULL),
+('PG1604002', 2, 'PS03', 'Windu Petugas Jele', 'L', 'Jalan Ayani Utara', '085474121363', 'PG1604002HE5Ut06qzQ.jpg', '2016-07-02 16:43:53', '2016-07-08 06:07:01', 1, NULL, NULL),
+('PG1604003', 3, NULL, 'Hendra Awesome', 'L', 'Jalan Awesome No.888', '085737353569', 'PG1604003UwoRMQmw6x.jpg', '2016-07-01 16:24:26', '2016-07-07 07:19:55', 1, NULL, NULL),
+('PG1604004', 12, NULL, 'Test Operator', 'L', 'Jalan Test asd', '082247464196', NULL, '2016-07-02 16:24:43', NULL, 3, NULL, NULL),
+('PG1604005', 13, 'PS06', 'Gusti Bagus', 'L', 'Jalan Ayani', '082247464196', NULL, '2016-07-02 16:44:33', NULL, 3, NULL, NULL),
+('PG1604006', 10, NULL, 'Dirut Mahesa 2', 'L', 'Jalan Kematian 2', '082247464196', NULL, '2016-07-02 16:05:14', NULL, 3, NULL, NULL),
+('PG1604007', 11, NULL, 'Awesome Dirut', 'L', 'Jalan Raya Bedugul', '082247464196', NULL, '2016-07-02 16:08:41', NULL, 3, NULL, NULL),
+('PG1607001', 14, NULL, 'New Operator', 'L', 'Jalan Gak Jelas', '084637362726', NULL, '2016-07-02 16:59:29', '2016-07-02 16:59:29', 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -226,24 +240,24 @@ CREATE TABLE `pungutan` (
 --
 
 INSERT INTO `pungutan` (`id`, `id_pasar`, `id_dagang`, `tgl_pungutan`, `type`, `deposited`, `deposited_to`, `detail`, `created_at`, `created_by`, `updated_at`, `deleted_at`) VALUES
-(12, 'PS03', 'DG1606000001', '2016-06-27', 'PG', NULL, NULL, 'HR', '2016-06-27 12:23:23', 2, '2016-06-27 12:23:23', NULL),
-(13, 'PS03', 'DG1606000003', '2016-06-27', 'PG', NULL, NULL, 'HR', '2016-06-27 12:23:43', 2, '2016-06-27 12:23:43', NULL),
-(14, 'PS03', 'DG1606000003', '2016-06-26', 'TG', NULL, NULL, 'HR', '2016-06-27 16:21:52', 2, '2016-06-27 16:21:52', NULL),
-(16, 'PS03', 'DG1606000001', '2016-06-26', 'TG', NULL, NULL, 'HR', '2016-06-27 16:25:06', 2, '2016-06-27 16:25:06', NULL),
-(18, 'PS03', 'DG1606000001', '2016-06-21', 'TG', NULL, NULL, 'HR', '2016-06-28 06:10:33', 2, '2016-06-28 06:10:33', NULL),
-(19, 'PS03', 'DG1606000003', '2016-06-21', 'TG', NULL, NULL, 'HR', '2016-06-28 06:10:37', 2, '2016-06-28 06:10:37', NULL),
-(20, 'PS03', 'DG1606000001', '2016-06-20', 'TG', NULL, NULL, 'HR', '2016-06-28 06:11:41', 2, '2016-06-28 06:11:41', NULL),
-(21, 'PS03', 'DG1606000003', '2016-06-20', 'TG', NULL, NULL, 'HR', '2016-06-28 06:11:49', 2, '2016-06-28 06:11:49', NULL),
-(22, 'PS03', 'DG1606000001', '2016-06-15', 'TG', NULL, NULL, 'HR', '2016-06-28 06:13:58', 2, '2016-06-28 06:13:58', NULL),
-(23, 'PS03', 'DG1606000003', '2016-06-15', 'TG', NULL, NULL, 'HR', '2016-06-28 06:14:50', 2, '2016-06-28 06:14:50', NULL),
-(24, 'PS03', 'DG1606000003', '2016-06-16', 'TG', NULL, NULL, 'HR', '2016-06-28 06:15:45', 2, '2016-06-28 06:15:45', NULL),
-(25, 'PS03', 'DG1606000001', '2016-06-28', 'PG', NULL, NULL, 'HR', '2016-06-28 06:18:03', 2, '2016-06-28 06:18:03', NULL),
-(26, 'PS03', 'DG1606000003', '2016-06-28', 'PG', NULL, NULL, 'HR', '2016-06-28 06:18:06', 2, '2016-06-28 06:18:06', NULL),
-(27, 'PS03', 'DG1606000001', '2016-06-06', 'TG', NULL, NULL, 'HR', '2016-06-28 07:15:06', 2, '2016-06-28 07:15:06', NULL),
-(28, 'PS03', 'DG1606000001', '2016-06-28', 'PG', NULL, NULL, 'BL', '2016-06-28 07:15:47', 2, '2016-06-28 07:15:47', NULL),
-(29, 'PS03', 'DG1606000003', '2016-06-28', 'PG', NULL, NULL, 'BL', '2016-06-28 07:24:51', 2, '2016-06-28 07:24:51', NULL),
-(30, 'PS03', 'DG1606000001', '2016-05-28', 'TG', NULL, NULL, 'BL', '2016-06-28 08:04:35', 2, '2016-06-28 08:04:35', NULL),
-(31, 'PS03', 'DG1606000003', '2016-05-28', 'TG', NULL, NULL, 'BL', '2016-06-28 08:04:51', 2, '2016-06-28 08:04:51', NULL);
+(12, 'PS03', 'DG1606000001', '2016-06-27', 'PG', NULL, 1, 'HR', '2016-06-27 12:23:23', 2, '2016-06-30 06:31:32', NULL),
+(13, 'PS03', 'DG1606000003', '2016-06-27', 'PG', '2016-06-30 06:31:32', 1, 'HR', '2016-06-27 12:23:43', 2, '2016-06-30 06:31:32', NULL),
+(14, 'PS03', 'DG1606000003', '2016-06-26', 'TG', '2016-06-29 15:52:51', 1, 'HR', '2016-06-27 16:21:52', 2, '2016-06-29 15:52:51', NULL),
+(16, 'PS03', 'DG1606000001', '2016-06-26', 'TG', '2016-06-29 15:52:51', 1, 'HR', '2016-06-27 16:25:06', 2, '2016-06-29 15:52:51', NULL),
+(18, 'PS03', 'DG1606000001', '2016-06-21', 'TG', '2016-06-29 15:52:51', 1, 'HR', '2016-06-28 06:10:33', 2, '2016-06-29 15:52:51', NULL),
+(19, 'PS03', 'DG1606000003', '2016-06-21', 'TG', '2016-06-29 15:52:51', 1, 'HR', '2016-06-28 06:10:37', 2, '2016-06-29 15:52:51', NULL),
+(20, 'PS03', 'DG1606000001', '2016-06-20', 'TG', '2016-06-29 15:52:51', 1, 'HR', '2016-06-28 06:11:41', 2, '2016-06-29 15:52:51', NULL),
+(21, 'PS03', 'DG1606000003', '2016-06-20', 'TG', '2016-06-29 15:52:51', 1, 'HR', '2016-06-28 06:11:49', 2, '2016-06-29 15:52:51', NULL),
+(22, 'PS03', 'DG1606000001', '2016-06-15', 'TG', '2016-06-29 15:52:51', 1, 'HR', '2016-06-28 06:13:58', 2, '2016-06-29 15:52:51', NULL),
+(23, 'PS03', 'DG1606000003', '2016-06-15', 'TG', '2016-06-29 15:52:51', 1, 'HR', '2016-06-28 06:14:50', 2, '2016-06-29 15:52:51', NULL),
+(24, 'PS03', 'DG1606000003', '2016-06-16', 'TG', '2016-06-29 15:52:51', 1, 'HR', '2016-06-28 06:15:45', 2, '2016-06-29 15:52:51', NULL),
+(25, 'PS03', 'DG1606000001', '2016-06-28', 'PG', '2016-06-29 15:52:51', 1, 'HR', '2016-06-28 06:18:03', 2, '2016-06-29 15:52:51', NULL),
+(26, 'PS03', 'DG1606000003', '2016-06-28', 'PG', '2016-06-29 15:52:51', 1, 'HR', '2016-06-28 06:18:06', 2, '2016-06-29 15:52:51', NULL),
+(27, 'PS03', 'DG1606000001', '2016-06-06', 'TG', '2016-06-29 15:52:51', 1, 'HR', '2016-06-28 07:15:06', 2, '2016-06-29 15:52:51', NULL),
+(28, 'PS03', 'DG1606000001', '2016-06-28', 'PG', '2016-06-29 15:52:51', 1, 'BL', '2016-06-28 07:15:47', 2, '2016-06-29 15:52:51', NULL),
+(29, 'PS03', 'DG1606000003', '2016-06-28', 'PG', '2016-06-29 15:52:51', 1, 'BL', '2016-06-28 07:24:51', 2, '2016-06-29 15:52:51', NULL),
+(30, 'PS03', 'DG1606000001', '2016-05-28', 'TG', '2016-06-29 15:52:51', 1, 'BL', '2016-06-28 08:04:35', 2, '2016-06-29 15:52:51', NULL),
+(31, 'PS03', 'DG1606000003', '2016-05-28', 'TG', '2016-06-29 15:52:51', 1, 'BL', '2016-06-28 08:04:51', 2, '2016-06-29 15:52:51', NULL);
 
 -- --------------------------------------------------------
 
@@ -358,7 +372,13 @@ CREATE TABLE `role_user` (
 
 INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 2, 1, '2016-04-22 08:39:06', '2016-04-22 08:39:06'),
-(2, 1, 2, '2016-04-22 08:39:06', '2016-04-22 08:39:06');
+(2, 1, 2, '2016-04-22 08:39:06', '2016-04-22 08:39:06'),
+(3, 3, 3, '2016-06-30 17:13:56', '2016-06-30 17:13:58'),
+(4, 3, 10, '2016-07-02 16:05:14', '2016-07-02 16:05:14'),
+(5, 3, 11, '2016-07-02 16:08:41', '2016-07-02 16:08:41'),
+(6, 2, 12, '2016-07-02 16:24:43', '2016-07-02 16:24:43'),
+(7, 1, 13, '2016-07-02 16:44:33', '2016-07-02 16:44:33'),
+(8, 2, 14, '2016-07-02 16:59:29', '2016-07-02 16:59:29');
 
 -- --------------------------------------------------------
 
@@ -383,6 +403,7 @@ CREATE TABLE `tarif` (
   `label` varchar(50) NOT NULL,
   `tarif` int(11) NOT NULL,
   `type` enum('HR','BL') NOT NULL,
+  `jenis_dagang` enum('PN','KS') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_by` int(10) NOT NULL,
@@ -394,11 +415,15 @@ CREATE TABLE `tarif` (
 -- Dumping data untuk tabel `tarif`
 --
 
-INSERT INTO `tarif` (`id`, `label`, `tarif`, `type`, `created_at`, `updated_at`, `created_by`, `updated_by`, `deleted_at`) VALUES
-(1, 'Tempat Berjualan', 2500, 'HR', '2016-06-24 04:31:55', NULL, 1, NULL, NULL),
-(2, 'Listrik', 2000, 'HR', '2016-06-24 04:36:51', NULL, 1, NULL, NULL),
-(3, 'Air', 1000, 'HR', '2016-06-24 04:37:30', NULL, 1, NULL, NULL),
-(4, 'Sewa Tempat', 54000, 'BL', '2016-06-28 06:38:01', NULL, 1, NULL, NULL);
+INSERT INTO `tarif` (`id`, `label`, `tarif`, `type`, `jenis_dagang`, `created_at`, `updated_at`, `created_by`, `updated_by`, `deleted_at`) VALUES
+(1, 'Tempat Berjualan', 2500, 'HR', 'KS', '2016-06-24 04:31:55', '2016-07-01 08:10:56', 1, NULL, NULL),
+(2, 'Listrik', 2000, 'HR', 'KS', '2016-06-24 04:36:51', '2016-07-01 08:11:02', 1, NULL, NULL),
+(3, 'Air', 1000, 'HR', 'KS', '2016-06-24 04:37:30', '2016-07-01 08:11:07', 1, NULL, NULL),
+(4, 'Sewa Tempat', 54000, 'BL', 'KS', '2016-06-28 06:38:01', '2016-07-01 08:11:13', 1, NULL, NULL),
+(6, 'Tempat Berjualan', 2500, 'HR', 'PN', '2016-06-28 06:38:01', '2016-06-28 06:38:01', 1, NULL, NULL),
+(7, 'Listrik', 2000, 'HR', 'PN', '2016-06-28 06:38:01', '2016-06-28 06:38:01', 1, NULL, NULL),
+(8, 'Air', 1000, 'HR', 'PN', '2016-06-28 06:38:01', '2016-06-28 06:38:01', 1, NULL, NULL),
+(9, 'Sewa Tempat', 54000, 'BL', 'PN', '2016-06-28 06:38:01', '2016-06-28 06:38:01', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -423,8 +448,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `remember_token`, `type`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'operator@mail.com', '$2y$10$SBGUtP4jIp5aOnt1HgVwU.D8uASzapMM3Zry5MasszxqkATwFqeDC', 'Qhzm8tVWKzRYpWZlKglWYHgwR1Glm9CCv0Beg8egBcw3QorhvEB3zgzgB3YD', 'O', '200', '2016-04-22 06:20:11', '2016-06-27 12:33:05', NULL),
-(2, 'petugas@mail.com', '$2y$10$8hFOBK0r7mTVUGQgYT5g8.901Ngw/YncTfZrSOxEwQhRBtJiuxr.u', '2ktdbhterXXGdNageGOtLrZ5023pPauUKh6OLsLVD9ZH3Lz3rXK7b20QH8LO', 'P', '200', '2016-04-22 08:46:14', '2016-06-28 08:06:25', NULL);
+(1, 'operator@mail.com', '$2y$10$SBGUtP4jIp5aOnt1HgVwU.D8uASzapMM3Zry5MasszxqkATwFqeDC', 'J5FDBjqPl6PqyjfzDQXaEcRM7KpKb7PREi4yECZD1sSa5gaTIN3zIZAO433a', 'O', '200', '2016-04-22 06:20:11', '2016-07-09 18:21:03', NULL),
+(2, 'petugas@mail.com', '$2y$10$8hFOBK0r7mTVUGQgYT5g8.901Ngw/YncTfZrSOxEwQhRBtJiuxr.u', '343dE7YenTuQaT6jmoJDH9ZfGtBqH4Dwdnwy3HFjzU9vwYSSp5vXbyyckn1k', 'P', '200', '2016-04-22 08:46:14', '2016-06-29 15:58:42', NULL),
+(3, 'dirut@mail.com', '$2y$10$UW0THjM3mkUkB.YI4lkW9unWuyDG1jsiVCvE3H3C2ZTWcv7uzEz3i', 'eEE0AxkCEmHbWhgAjNpJreDbUdmmSxSqQmZm7dz3P7BlrE3FRdBVnMme8nbm', 'D', '200', '2016-06-30 17:12:31', '2016-07-09 18:19:37', NULL),
+(10, 'dirut2@gmail.com', '$2y$10$pByyBk5xwhVNKMz2r1W3..mXaRtI5bP7wIDhMI5EjOm6nHc0y/P0e', NULL, 'D', '200', '2016-07-02 16:05:14', '2016-07-02 16:07:27', NULL),
+(11, 'dirut3@gmail.com', '$2y$10$xxKzMBBd1evD5d1QXVjt0.BNcPIScAqkekfvg3M8YzuUzBa6zWmC2', NULL, 'D', '200', '2016-07-02 16:08:41', '2016-07-02 16:08:41', NULL),
+(12, 'operator2@gmail.com', '$2y$10$lfSAuvdVmGQjPg4sS0YIcet.4J7jW2JJ6Sz0.ujDMVoEk3rxB4ica', NULL, 'O', '200', '2016-07-02 16:24:43', '2016-07-02 16:24:43', NULL),
+(13, 'petugas2@gmail.com', '$2y$10$6XgAlX95J3xndWK00p0WyuOD/faYoBAroK5D/QISngIFGEqufyNc6', NULL, 'P', '200', '2016-07-02 16:44:33', '2016-07-02 16:44:33', NULL),
+(14, 'wijaya.imd@gmail.com', '$2y$10$D77DNKh3.QuPR0vQJLDBuO8hsLNYXAjIvW0Q7pISInhnyOnchcla2', NULL, 'O', '200', '2016-07-02 16:59:29', '2016-07-02 16:59:29', NULL);
 
 --
 -- Indexes for dumped tables
@@ -577,7 +608,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_user`
 --
 ALTER TABLE `role_user`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `settings`
 --
@@ -587,12 +618,12 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `tarif`
 --
 ALTER TABLE `tarif`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --

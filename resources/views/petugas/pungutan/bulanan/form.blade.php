@@ -47,7 +47,7 @@
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group form-md-line-input">
-                    {!! Form::number('sewa_tempat', $tarif->find(4)->tarif, ['class' => 'form-control', 'id'=>'sewa_tempat', 'min'=>0]) !!}
+                    {!! Form::number('sewa_tempat', null, ['class' => 'form-control', 'id'=>'sewa_tempat', 'min'=>0]) !!}
                     {!! Form::Label('sewa_tempat', 'Sewa Tempat') !!}
                 </div>
 
@@ -87,9 +87,35 @@
 @push('page_script')
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#id_dagang").select2();
+        $("#id_dagang").select2().on("change", function(e) {
+            console.log(e.target.value);
+            getTarif(e.target.value);
+        });
 
         var sewa_tempat = $("#sewa_tempat").val();
+
+        function getTarif(id) {
+            var id_pasar = id;
+
+            var url = "{!! url('/petugas/pungutan/bulanan/tarif') !!}/"+id_pasar;
+            $.ajaxSetup({
+                headers: { "X-CSRF-Token": $("meta[name=\'csrf-token\']").attr("content") }
+            });
+            $.ajax({
+                method: "GET",
+                url: url
+            }).success(function( data ) {
+                var obj = jQuery.parseJSON( data );
+
+                $("#sewa_tempat").val(obj.tempat);
+
+                ppn = Number(obj.tempat)*Number(10)/Number(100);
+                total = Number(obj.tempat)+Number(ppn);
+
+                $("#ppn").val(ppn);
+                $("#total").val(total);
+            });
+        }
 
         function setTotal() {
             var ppn = null;
@@ -105,7 +131,7 @@
             sewa_tempat = $(this).val();
             setTotal();
         });
-        setTotal();
+        getTarif($("#id_dagang").val());
     });
 </script>
 <script>

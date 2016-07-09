@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth', 'rbac:is,petugas'], 'prefix' => 'petugas'
             Route::post('/create',['uses'=>'Petugas\PungutanController@storeHarian']);
             Route::get('/datatable',['uses'=>'Petugas\PungutanController@dataTableHarian', 'middleware' => 'ajax']);
             Route::get('/detail/{id}',['uses'=>'Petugas\PungutanController@showHarian']);
+            Route::get('/tarif/{id}',['uses'=>'Petugas\PungutanController@getTarifHarian']);
         });
 
         Route::group(['prefix'=>'bulanan', 'as'=>'.bulanan'], function () {
@@ -52,6 +53,7 @@ Route::group(['middleware' => ['auth', 'rbac:is,petugas'], 'prefix' => 'petugas'
             Route::post('/create',['uses'=>'Petugas\PungutanController@storeBulanan']);
             Route::get('/datatable',['uses'=>'Petugas\PungutanController@dataTableBulanan', 'middleware' => 'ajax']);
             Route::get('/detail/{id}',['uses'=>'Petugas\PungutanController@showBulanan']);
+            Route::get('/tarif/{id}',['uses'=>'Petugas\PungutanController@getTarifBulanan']);
         });
 
     });

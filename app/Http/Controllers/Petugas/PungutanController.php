@@ -21,11 +21,6 @@ use Illuminate\Support\Facades\Auth;
 
 class PungutanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function indexHarian()
     {
         return view("petugas.pungutan.harian.grid");
@@ -68,11 +63,6 @@ class PungutanController extends Controller
             ->make(true);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function createHarian()
     {
         $id_pasar = Auth::user()->pegawai->id_pasar;
@@ -90,12 +80,24 @@ class PungutanController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function getTarifHarian($id)
+    {
+        $dagang = Dagang::findOrFail($id);
+        $type = $dagang->jenis_dagang;
+        $tarif = Tarif::where('jenis_dagang',$type)->where('type','HR')->get();
+        $return = [];
+        foreach ($tarif as $data){
+            if($data->label == 'Tempat Berjualan'){
+                $return['tempat'] = $data->tarif;
+            }elseif ($data->label == 'Listrik'){
+                $return['listrik'] = $data->tarif;
+            }elseif ($data->label == 'Air'){
+                $return['air'] = $data->tarif;
+            }
+        }
+        return json_encode($return);
+    }
+
     public function storeHarian(Request $request)
     {
         $pungutan = new Pungutan();
@@ -133,59 +135,14 @@ class PungutanController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function showHarian($id)
     {
         $model = Pungutan::where('id',$id)->where('detail',Pungutan::D_HARIAN)->firstOrFail();
         return view('petugas.pungutan.harian.detail',['model'=>$model]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function editHarian($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function updateHarian(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroyHarian($id)
-    {
-        //
-    }
-
     ///////////////////////////////////////////////// BULANAN /////////////////////////////////////////////////////////
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function indexBulanan()
     {
         return view("petugas.pungutan.bulanan.grid");
@@ -228,11 +185,6 @@ class PungutanController extends Controller
             ->make(true);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function createBulanan()
     {
         $id_pasar = Auth::user()->pegawai->id_pasar;
@@ -250,12 +202,15 @@ class PungutanController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    public function getTarifBulanan($id)
+    {
+        $dagang = Dagang::findOrFail($id);
+        $type = $dagang->jenis_dagang;
+        $tarif = Tarif::where('jenis_dagang',$type)->where('type','BL')->first();
+        $return = ['tempat'=>$tarif->tarif];
+        return json_encode($return);
+    }
+
     public function storeBulanan(Request $request)
     {
         $pungutan = new Pungutan();
@@ -290,50 +245,10 @@ class PungutanController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function showBulanan($id)
     {
         $model = Pungutan::where('id',$id)->where('detail',Pungutan::D_BULANAN)->firstOrFail();
         return view('petugas.pungutan.bulanan.detail',['model'=>$model]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function editBulanan($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function updateBulanan(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroyBulanan($id)
-    {
-        //
     }
 
     ////////////////////////////////////////////// TUNGGAKAN ///////////////////////////////////////////////////////////

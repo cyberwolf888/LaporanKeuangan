@@ -47,14 +47,14 @@
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group form-md-line-input">
-                    {!! Form::number('tempat_berjualan', $tarif->find(1)->tarif, ['class' => 'form-control', 'id'=>'tempat_berjualan', 'min'=>0]) !!}
+                    {!! Form::number('tempat_berjualan', null, ['class' => 'form-control', 'id'=>'tempat_berjualan', 'min'=>0]) !!}
                     {!! Form::Label('tempat_berjualan', 'Tempat Berjualan') !!}
                 </div>
 
             </div>
             <div class="col-md-6">
                 <div class="form-group form-md-line-input">
-                    {!! Form::number('listrik', $tarif->find(2)->tarif, ['class' => 'form-control', 'id'=>'listrik', 'min'=>0]) !!}
+                    {!! Form::number('listrik', null, ['class' => 'form-control', 'id'=>'listrik', 'min'=>0]) !!}
                     {!! Form::Label('listrik', 'Pungutan Listrik') !!}
                 </div>
 
@@ -63,7 +63,7 @@
         <div class="col-md-12">
             <div class="col-md-6">
                 <div class="form-group form-md-line-input">
-                    {!! Form::number('air', $tarif->find(3)->tarif, ['class' => 'form-control', 'id'=>'air', 'min'=>0]) !!}
+                    {!! Form::number('air', null, ['class' => 'form-control', 'id'=>'air', 'min'=>0]) !!}
                     {!! Form::Label('air', 'Pungutan Air') !!}
                 </div>
 
@@ -112,11 +112,41 @@
 @push('page_script')
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#id_dagang").select2();
+        $("#id_dagang").select2().on("change", function(e) {
+            console.log(e.target.value);
+            getTarif(e.target.value);
+        });
 
         var tempat_berjualan = $("#tempat_berjualan").val();
         var listrik = $("#listrik").val();
         var air = $("#air").val();
+
+        function getTarif(id) {
+            var id_pasar = id;
+
+            var url = "{!! url('/petugas/pungutan/harian/tarif') !!}/"+id_pasar;
+            $.ajaxSetup({
+                headers: { "X-CSRF-Token": $("meta[name=\'csrf-token\']").attr("content") }
+            });
+            $.ajax({
+                method: "GET",
+                url: url
+            }).success(function( data ) {
+                var obj = jQuery.parseJSON( data );
+
+                $("#tempat_berjualan").val(obj.tempat);
+                $("#listrik").val(obj.listrik);
+                $("#air").val(obj.air);
+
+                jumlah = Number((obj.tempat)+Number(obj.listrik)+Number(obj.air));
+                ppn = Number(jumlah)*Number(10)/Number(100);
+                total = Number(jumlah)+Number(ppn);
+
+                $("#jumlah").val(jumlah);
+                $("#ppn").val(ppn);
+                $("#total").val(total);
+            });
+        }
 
         function setTotal() {
             var jumlah = null;
@@ -131,6 +161,7 @@
             $("#ppn").val(ppn);
             $("#total").val(total);
         };
+
         $("#tempat_berjualan").change(function () {
             tempat_berjualan = $(this).val();
             setTotal();
@@ -143,7 +174,8 @@
             air = $(this).val();
             setTotal();
         });
-        setTotal();
+
+        getTarif($("#id_dagang").val());
     });
 </script>
 <script>
