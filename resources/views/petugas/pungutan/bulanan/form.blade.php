@@ -91,9 +91,6 @@
             console.log(e.target.value);
             getTarif(e.target.value);
         });
-
-        var sewa_tempat = $("#sewa_tempat").val();
-
         function getTarif(id) {
             var id_pasar = id;
 
@@ -118,6 +115,8 @@
         }
 
         function setTotal() {
+            var sewa_tempat = $("#sewa_tempat").val();
+
             var ppn = null;
             var total = null;
 
@@ -128,7 +127,6 @@
             $("#total").val(total);
         };
         $("#sewa_tempat").change(function () {
-            sewa_tempat = $(this).val();
             setTotal();
         });
         getTarif($("#id_dagang").val());

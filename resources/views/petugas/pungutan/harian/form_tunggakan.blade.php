@@ -117,11 +117,6 @@
             console.log(e.target.value);
             getTarif(e.target.value);
         });
-
-        var tempat_berjualan = $("#tempat_berjualan").val();
-        var listrik = $("#listrik").val();
-        var air = $("#air").val();
-
         function getTarif(id) {
             var id_pasar = id;
 
@@ -150,6 +145,10 @@
         }
 
         function setTotal() {
+            var tempat_berjualan = $("#tempat_berjualan").val();
+            var listrik = $("#listrik").val();
+            var air = $("#air").val();
+
             var jumlah = null;
             var ppn = null;
             var total = null;
@@ -163,15 +162,12 @@
             $("#total").val(total);
         };
         $("#tempat_berjualan").change(function () {
-            tempat_berjualan = $(this).val();
             setTotal();
         });
         $("#listrik").change(function () {
-            listrik = $(this).val();
             setTotal();
         });
         $("#air").change(function () {
-            air = $(this).val();
             setTotal();
         });
         getTarif($("#id_dagang").val());
