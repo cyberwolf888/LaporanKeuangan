@@ -46,25 +46,12 @@
                         </div>
                         <div class="col-sm-8 text-right">
                             <div class="forgot-password">
-                                <a href="javascript:;" id="forget-password" class="forget-password">Forgot Password?</a>
+                                <a href="{{ url('/password/reset') }}" id="forget-password" class="forget-password">Forgot Password?</a>
                             </div>
                             <button class="btn blue" type="submit">Sign In</button>
                         </div>
                     </div>
                 </form>
-                <!-- BEGIN FORGOT PASSWORD FORM -->
-                <form class="forget-form" action="{{ url('/password/reset') }}" method="post">
-                    {!! csrf_field() !!}
-                    <h3 class="font-green">Forgot Password ?</h3>
-                    <p> Enter your e-mail address below to reset your password. </p>
-                    <div class="form-group">
-                        <input class="form-control placeholder-no-fix form-group" type="text" autocomplete="off" placeholder="Email" name="email" /> </div>
-                    <div class="form-actions">
-                        <button type="button" id="back-btn" class="btn grey btn-default">Back</button>
-                        <button type="submit" class="btn blue btn-success uppercase pull-right">Submit</button>
-                    </div>
-                </form>
-                <!-- END FORGOT PASSWORD FORM -->
             </div>
             <div class="login-footer">
                 <div class="row bs-reset">
