@@ -54,7 +54,7 @@
                 <div class="portlet light profile-sidebar-portlet bordered">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic">
-                        <img src="{{ isset($model->pegawai->photo) ? url('/assets/photo/').'/'.$model->pegawai->photo : url('/assets/global/img/default-user-avatar.png') }}" class="img-responsive" alt=""> </div>
+                        <img src="{{ $model->pegawai->photo!=null ? url('/assets/photo/').'/'.$model->pegawai->photo : url('/assets/global/img/default-user-avatar.png') }}" class="img-responsive" alt=""> </div>
                     <!-- END SIDEBAR USERPIC -->
                     <!-- SIDEBAR USER TITLE -->
                     <div class="profile-usertitle">
